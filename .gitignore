@@ -28,4 +28,5 @@ selenium_standalone_zips/**
 
 .idea/
 core-frmk/app/
+core-frmk/allure-report/**/*
 core-frmk/.env
