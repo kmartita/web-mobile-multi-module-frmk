@@ -13,6 +13,7 @@ test-output
 /target/
 /allure-report/**/*
 /allure-report
+/allure-results
 /.allure
 /**/.allure
 
@@ -22,8 +23,7 @@ selenium_standalone_zips/**
 /selenium_standalone_binaries/**
 /selenium_standalone_zips/**
 
-/module-tests/app/**
-/module-tests/allure-results/**
+/module-tests/allure-results
 /module-tests/test-output/**
 
 .idea/
