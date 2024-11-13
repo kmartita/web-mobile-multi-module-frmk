@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.core</groupId>
+    <artifactId>core-frmk</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>project.tests</groupId>
+  <artifactId>module-tests</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>module-tests</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>project.app</groupId>
+      <artifactId>module-app</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>project.data</groupId>
+      <artifactId>module-data</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</project>
