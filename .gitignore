@@ -23,7 +23,7 @@ selenium_standalone_zips/**
 /selenium_standalone_binaries/**
 /selenium_standalone_zips/**
 
-/module-tests/allure-results
+core-frmk/module-tests/allure-results
 /module-tests/test-output/**
 
 .idea/
