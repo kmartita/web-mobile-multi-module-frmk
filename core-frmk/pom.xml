@@ -18,8 +18,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <failIfNoTests>false</failIfNoTests>
-    <suiteFile>${project.basedir}/module-tests/src/test/resources/suites/default.xml</suiteFile>
+    <suiteFile>../module-tests/src/test/resources/suites/testng.xml</suiteFile>
     <allure.max.title.length>1000</allure.max.title.length>
+    <failIfNoTests>false</failIfNoTests>
   </properties>
 
   <build>
@@ -39,9 +40,10 @@
         <version>3.2.3</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>${project.basedir}/module-tests/src/test/resources/suites/${suiteFile}</suiteXmlFile>
+            <suiteXmlFile>${suiteFile}</suiteXmlFile>
           </suiteXmlFiles>
-          <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"</argLine>
+          <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"
+          </argLine>
           <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
           <systemPropertyVariables>
             <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
@@ -58,8 +60,6 @@
           </dependency>
         </dependencies>
       </plugin>
-
-      <!--New-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
@@ -87,17 +87,24 @@
         </configuration>
       </plugin>-->
       <!--New-->
-
-      <!--Add to reporting -  DELL -->
-      <!--<plugin>
+      <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
         <version>2.12.0</version>
         <configuration>
-          <reportVersion>2.12.0</reportVersion>
+          <reportVersion>2.15.0</reportVersion>
+          <reportDirectory>${user.dir}/allure-report</reportDirectory>
         </configuration>
-      </plugin>-->
-
+        <executions>
+          <execution>
+            <id>allure-results</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -130,7 +137,7 @@
         <artifactId>allure-maven</artifactId>
         <version>2.12.0</version>
         <configuration>
-          <reportVersion>2.14.0</reportVersion>
+          <reportVersion>2.15.0</reportVersion>
           <reportDirectory>${user.dir}/allure-report</reportDirectory>
           <resultsDirectory>${project.basedir}/target/allure-results</resultsDirectory>
           <properties>
@@ -181,6 +188,7 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>7.7.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.uncommons</groupId>
