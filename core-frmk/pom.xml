@@ -15,8 +15,10 @@
   </modules>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <failIfNoTests>false</failIfNoTests>
-    <suiteFile>testng.xml</suiteFile>
+    <suiteFile>${project.basedir}/module-tests/src/test/resources/suites/default.xml</suiteFile>
     <allure.max.title.length>1000</allure.max.title.length>
   </properties>
 
@@ -37,10 +39,16 @@
         <version>3.2.3</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile>
+            <suiteXmlFile>${project.basedir}/module-tests/src/test/resources/suites/${suiteFile}</suiteXmlFile>
           </suiteXmlFiles>
           <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"</argLine>
           <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+          <systemPropertyVariables>
+            <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
+            <allure.max.title.length>${allure.max.title.length}</allure.max.title.length>
+            <allure.results.directory>${project.basedir}/target/allure-results</allure.results.directory>
+            <enable.jdbc>false</enable.jdbc>
+          </systemPropertyVariables>
         </configuration>
         <dependencies>
           <dependency>
@@ -50,14 +58,46 @@
           </dependency>
         </dependencies>
       </plugin>
+
+      <!--New-->
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <excludeDefaultDirectories>false</excludeDefaultDirectories>
+          <outputDirectory>${project.basedir}/allure-report</outputDirectory>
+        </configuration>
+      </plugin>
+      <!--<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.6</version>
+        <configuration>
+          <outputEncoding>UTF-8</outputEncoding>
+          <outputDirectory>${user.dir}/allure-report</outputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.4.1.v20170120</version>
+        <configuration>
+          <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+        </configuration>
+      </plugin>-->
+      <!--New-->
+
+      <!--Add to reporting -  DELL -->
+      <!--<plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
         <version>2.12.0</version>
         <configuration>
           <reportVersion>2.12.0</reportVersion>
         </configuration>
-      </plugin>
+      </plugin>-->
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -81,6 +121,27 @@
       </plugin>
     </plugins>
   </build>
+
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.12.0</version>
+        <configuration>
+          <reportVersion>2.14.0</reportVersion>
+          <reportDirectory>${user.dir}/allure-report</reportDirectory>
+          <resultsDirectory>${project.basedir}/target/allure-results</resultsDirectory>
+          <properties>
+            <allure.issues.tracker.pattern>https://jira.example.org/browse/%s</allure.issues.tracker.pattern>
+            <allure.tests.management.pattern>https://tms.example.org/browse/%s</allure.tests.management.pattern>
+          </properties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
   <repositories>
     <repository>
       <id>jcenter</id>
