@@ -1,5 +1,4 @@
-target
-test-output
+.idea/
 .classpath
 .project
 .settings
@@ -7,26 +6,23 @@ test-output
 .sts4-cache
 **/.DS_Store
 
-/src/test/java/debug/
-/**/debug/**/*
+target
+**/target/
+test-output
+**/test-output/**
 
-/target/
-/allure-report/**/*
+**/allure-report/**/*
 /allure-report
 /allure-results
+**/allure-results
 /.allure
 /**/.allure
 
 selenium_standalone_binaries/**
 selenium_standalone_zips/**
-
 /selenium_standalone_binaries/**
 /selenium_standalone_zips/**
 
-core-frmk/module-tests/allure-results
-/module-tests/test-output/**
-
-.idea/
-core-frmk/app/
-core-frmk/allure-report/**/*
 core-frmk/.env
+core-frmk/app/
+
