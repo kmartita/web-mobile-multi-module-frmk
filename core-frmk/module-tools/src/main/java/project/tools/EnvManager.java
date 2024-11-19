@@ -10,7 +10,7 @@ public class EnvManager {
             .directory(PathToFile.getRootOfProject())
             .load();
 
-    public static final String DEFAULT_APPIUM_URL = getEnvOption("APPIUM_URL");
+    public static final String APPIUM_URL = getEnvOption("APPIUM_URL");
     public static final String REMOTE_URL = getEnvOption("REMOTE_URL");
     public static final String BASE_URL = getEnvOption("BASE_URL");
     public static final String APP_NAME = getEnvOption("APP_NAME");

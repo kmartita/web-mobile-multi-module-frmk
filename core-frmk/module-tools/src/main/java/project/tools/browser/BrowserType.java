@@ -29,8 +29,8 @@ public enum BrowserType implements IBrowserType {
         public FirefoxOptions getCapabilities() {
             FirefoxOptions options = new FirefoxOptions();
             options.addPreference("dom.webnotifications.enabled", false);
-            options.addPreference(FirefoxDriver.Capability.MARIONETTE,"true");
-            options.addPreference(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
+            options.addPreference(FirefoxDriver.Capability.MARIONETTE, "true");
+            options.addPreference(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
             return options;
         }
 
@@ -149,16 +149,19 @@ public enum BrowserType implements IBrowserType {
 
     private static String getOsDir() {
         String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("windows"))
-            return "windows";
 
-        if (os.contains("linux"))
-            return "linux";
-
-        if (os.contains("mac"))
-            return "osx";
-
-        throw new RuntimeException(format("\nUnknown OS: %s\n", os));
+        switch (os) {
+            case "windows":
+                return "windows";
+            case "linux":
+                return "linux";
+            case "mac":
+            case "mac os":
+            case "mac os x":
+                return "osx";
+            default:
+                throw new RuntimeException(String.format("\nUnknown OS: %s\n", os));
+        }
     }
 
     private String getArchDir() {

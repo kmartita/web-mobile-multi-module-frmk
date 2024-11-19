@@ -31,8 +31,6 @@ public class ConfigurationManager {
     private static final String APP_BUNDLE_ID_VARIABLE = "bundleId";
 
     private static final String DEFAULT_IOS_VERSION = "16.2";
-    public static final String PREVIOUS_APP_VERSION = "14";
-    public static final String CURRENT_APP_VERSION = "15";
     private static final List<String> SUPPORTED_IOS_VERSIONS = Arrays.asList("16.2", "18.1");
     private static final String DEVICE_NAME = "iPad Pro (11-inch) (4th generation)";
 
@@ -78,49 +76,25 @@ public class ConfigurationManager {
         return System.getProperty(TEST_APP_NAME_VARIABLE, APP_NAME);
     }
 
-    public static String getAppVersion(){
-        String env = ConfigurationManager.getEnvironment().toLowerCase();
-
-        switch (env) {
-            case "regression":
-            case "patch":
-                return PREVIOUS_APP_VERSION;
-            case "manage":
-            default:
-                return CURRENT_APP_VERSION;
-        }
-    }
-
     public static String getTestAppAbsolutePath() {
         String appPath = System.getProperty(APP_PATH_VARIABLE);
         if (!StringUtils.isEmpty(appPath))
             return appPath;
 
-        String version = getAppVersion();
-        System.out.printf("APP VERSION: '%s'\n", version);
         String userDir = PathToFile.getRootOfProject();
         String fileSeparator = FileSystems.getDefault().getSeparator();
 
         String env = getEnvironment();
-        String folder;
+        String pathToApp;
         switch (env) {
-            case "patch" :
-                folder = "patch";
-                break;
-            case "manage" :
-                folder = "dev";
-                break;
+            case "local" :
             case "regression" :
-                folder = version.equals(ConfigurationManager.CURRENT_APP_VERSION) ? "dev" : "patch";
+                pathToApp = join(fileSeparator, userDir, "app", getTestAppName());
                 break;
 
-            default : throw new IllegalStateException(format("\nUnknown environment has been provided [%s].\n" +
-                                                             "Please follow to getTestAppAbsolutePath() method and add env", env));
+            default : throw new IllegalStateException(format("\nUnknown environment has been provided [%s].\n", env));
         }
 
-        System.out.printf("Get [%s] app\n", folder.toUpperCase());
-
-        String pathToApp = join(fileSeparator, userDir, "app", folder, getTestAppName());
         File app = new File(pathToApp);
         return app.getAbsolutePath();
     }

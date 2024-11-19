@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static project.tools.ConfigurationManager.*;
-import static project.tools.EnvManager.DEFAULT_APPIUM_URL;
+import static project.tools.EnvManager.APPIUM_URL;
 import static project.tools.EnvManager.REMOTE_URL;
 
 public class MobileDriver {
@@ -36,7 +36,7 @@ public class MobileDriver {
         String appiumUrl = System.getProperty(APPIUM_URL_VARIABLE);
 
         if (appiumUrl == null) {
-            appiumUrl = DEFAULT_APPIUM_URL;
+            appiumUrl = APPIUM_URL;
         }
         try {
             driver = new IOSDriver(new URL(appiumUrl), capabilities);
