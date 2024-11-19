@@ -74,11 +74,12 @@ This template provides a UI test automation solution suitable for both web and m
             |—-main
                 |—-java
     |—-module-data
+        |—-pom.xml
         |—-src
             |—-main
                 |—-java
-        |—-pom.xml
     |—-module-tests
+        |—-pom.xml
         |—-src
             |—-test
                 |—-java
@@ -86,12 +87,11 @@ This template provides a UI test automation solution suitable for both web and m
                         |—-suites
                             |—-testng.xml
                         |—-allure.properties
-        |—-pom.xml
     |—-module-tools
-	    |—-src
-	        |—-main
-	            |—-java
-    |—-pom.xml
+        |—-pom.xml
+        |—-src
+            |—-main
+               |—-java
 ```
 1. **Root Module (core-frmk)**. Serves as the parent ***pom.xml*** for all submodules. Contains common dependencies and configurations for the entire project structure. Defines four modules that are part of the project: module-app, module-data, module-tests, and module-tools.<br/>
     - ***.env*** file is a text file used for storing configuration settings and environment variables in a project. It allows you to easily manage configuration parameters such as APPIUM_URL, REMOTE_URL, BASE_URL, APP_NAME, and APP_BUNDLE_ID without hardcoding them directly in the code.<br/>
