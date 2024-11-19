@@ -69,10 +69,10 @@ This template provides a UI test automation solution suitable for both web and m
     |—-app
         |—-[APP_NAME].app
     |—-module-app
+        |—-pom.xml
         |—-src
             |—-main
                 |—-java
-        |—-pom.xml
     |—-module-data
         |—-src
             |—-main
