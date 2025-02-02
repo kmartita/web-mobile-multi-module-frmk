@@ -154,3 +154,14 @@ To generate a report by Allure after tests have finished, use the following comm
       $ mvn allure:report
 
 The report can be found in the **root** folder of a project. The folder named `allure-report` contains the generated report. Just open the `index.html` file in a browser.<br/>
+
+#### Mobile:
+<img width="1920" alt="Mobile_Overview" src="https://github.com/user-attachments/assets/0770fd05-3938-4563-88fd-2d7804caaf41" />
+<img width="1920" alt="Mobile_Packages" src="https://github.com/user-attachments/assets/6d447a17-4334-465d-8abb-8319d041738f" />
+
+#### Web:
+<img width="1920" alt="Web_Overview" src="https://github.com/user-attachments/assets/f96a4d41-122f-4439-b34c-512c14d18ee5" />
+<img width="1920" alt="Web_Packages" src="https://github.com/user-attachments/assets/9ac692dd-f736-4c74-926d-8c3d8dc7d017" />
+
+
+
