@@ -1,5 +1,6 @@
 package project.tests;
 
+import com.github.rsheremeta.AllureEnv;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
@@ -15,11 +16,12 @@ import project.tools.pageobject.IApp;
 import project.tools.reports.BaseHTMLReporter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static project.tools.ConfigurationManager.getAppBundleId;
+import static project.tools.ConfigurationManager.*;
 import static project.tools.browser.Browser.quitAllDrivers;
 import static project.tools.pageobject.mobile.AbstractMobileApp.getIOSDriver;
 
@@ -120,6 +122,15 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
         if(ConfigurationManager.isRunAppiumFromCode()){
             stopAppiumServer();
         }
+
+        Map<String, String> envData = new HashMap<>();
+        envData.put("Approach:", "MOBILE");
+        envData.put("Platform:", getPlatform().toString());
+        envData.put("Environment:", getEnvironment());
+        envData.put("Device:", getDevice());
+        envData.put("iOS version:", getIosVersion());
+
+        AllureEnv.createAllureEnvironmentFile(envData);
     }
 
     private long getCountOfClassesByStatus(Map<String, Map<String,String>> map, String status) {

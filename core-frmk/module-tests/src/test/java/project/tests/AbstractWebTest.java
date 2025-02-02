@@ -1,5 +1,6 @@
 package project.tests;
 
+import com.github.rsheremeta.AllureEnv;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
@@ -10,6 +11,11 @@ import project.tools.ConfigurationManager;
 import project.tools.pageobject.IApp;
 import project.tools.reports.BaseHTMLReporter;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static project.tools.ConfigurationManager.*;
+import static project.tools.EnvManager.BASE_URL;
 import static project.tools.browser.Browser.quitAllDrivers;
 
 public abstract class AbstractWebTest extends GenericTest implements IAppTest {
@@ -67,5 +73,14 @@ public abstract class AbstractWebTest extends GenericTest implements IAppTest {
         quitAllDrivers();
         System.out.println("=====================================");
         System.out.printf("Is fully automated: %s%n", isFullyAutomated());
+
+        Map<String, String> envData = new HashMap<>();
+        envData.put("Approach:", "WEB");
+        envData.put("Platform:", getPlatform().toString());
+        envData.put("Environment:", getEnvironment());
+        envData.put("Browser:", getBrowserName());
+        envData.put("Base URL:", BASE_URL);
+
+        AllureEnv.createAllureEnvironmentFile(envData);
     }
 }
