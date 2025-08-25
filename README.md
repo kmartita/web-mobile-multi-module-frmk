@@ -201,12 +201,12 @@ This command starts a local web server and automatically opens the generated rep
 
 An example of the generated [Allure TestNG](https://allurereport.org/docs/testng/) report looks like this:<br/>
 ### Mobile:
-<img width="1920" alt="Mobile_Overview" src="https://github.com/user-attachments/assets/0770fd05-3938-4563-88fd-2d7804caaf41" />
-<img width="1920" alt="Mobile_Packages" src="https://github.com/user-attachments/assets/6d447a17-4334-465d-8abb-8319d041738f" />
+<img width="1920" height="1038" alt="Mobile_Overview" src="https://github.com/user-attachments/assets/a42bc769-0b99-4792-81a4-4a9cb28f19f4" />
+<img width="1920" height="466" alt="Mobile_Packages" src="https://github.com/user-attachments/assets/cd350a01-eca5-4c62-9cca-f7bf2e413b9c" />
 
 ### Web:
-<img width="1920" alt="Web_Overview" src="https://github.com/user-attachments/assets/f96a4d41-122f-4439-b34c-512c14d18ee5" />
-<img width="1920" alt="Web_Packages" src="https://github.com/user-attachments/assets/9ac692dd-f736-4c74-926d-8c3d8dc7d017" />
+<img width="1920" height="1036" alt="Web_Overview" src="https://github.com/user-attachments/assets/911a14b1-7511-483c-a693-ed7dcb663ef4" />
+<img width="1920" height="450" alt="Web_Packages" src="https://github.com/user-attachments/assets/c6e77727-bddb-4830-8c2e-c065f9b66506" />
 
 
 
