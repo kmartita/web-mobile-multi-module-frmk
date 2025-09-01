@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.xml.XmlSuite;
 import project.app.Web;
 import project.tools.ConfigurationManager;
-import project.tools.pageobject.IApp;
+import project.tools.pageobject.AbstractApp;
 import project.tools.reports.BaseHTMLReporter;
 
 import java.util.HashMap;
@@ -16,14 +16,14 @@ import java.util.Map;
 
 import static project.tools.ConfigurationManager.*;
 import static project.tools.EnvManager.BASE_URL;
-import static project.tools.browser.Browser.quitAllDrivers;
+import static project.tools.drivers.Drivers.quitAllDrivers;
 
 public abstract class AbstractWebTest extends GenericTest implements IAppTest {
 
     protected static final Web web = new Web();
 
     @Override
-    public IApp getTestedAppInstance() {
+    public AbstractApp getTestedAppInstance() {
         return web;
     }
 
@@ -78,7 +78,7 @@ public abstract class AbstractWebTest extends GenericTest implements IAppTest {
         envData.put("Approach:", "WEB");
         envData.put("Platform:", getPlatform().toString());
         envData.put("Environment:", getEnvironment());
-        envData.put("Browser:", getBrowserName());
+        envData.put("Browser:", getDriverType().toString());
         envData.put("Base URL:", BASE_URL);
 
         AllureEnv.createAllureEnvironmentFile(envData);

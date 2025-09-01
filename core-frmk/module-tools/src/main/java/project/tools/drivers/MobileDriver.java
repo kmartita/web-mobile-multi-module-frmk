@@ -1,10 +1,9 @@
-package project.tools.browser;
+package project.tools.drivers;
 
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import project.tools.ConfigurationManager;
 
 import java.net.MalformedURLException;
@@ -12,23 +11,11 @@ import java.net.URL;
 
 import static project.tools.ConfigurationManager.*;
 import static project.tools.EnvManager.APPIUM_URL;
-import static project.tools.EnvManager.REMOTE_URL;
 
 public class MobileDriver {
 
-    private static RemoteWebDriver startRemoteIos(DesiredCapabilities capabilities) {
-        RemoteWebDriver driver;
-        try {
-            driver = new IOSDriver(new URL(REMOTE_URL), capabilities);
-
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        return driver;
-    }
-
-    public static WebDriver startIos() {
-        return (Browser.IS_REMOTE) ? startRemoteIos(iosNativeAppCapabilities()) : startIos(iosNativeAppCapabilities());
+    public static WebDriver startIosDriver() {
+        return startIos(iosNativeAppCapabilities());
     }
 
     private static WebDriver startIos(DesiredCapabilities capabilities) {

@@ -1,13 +1,14 @@
-package project.web.page;
+package project.web.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import project.tools.pageobject.element.ITextInput;
-import project.tools.pageobject.element.Input;
+import project.tools.pageobject.htmlelements.ITextInput;
+import project.tools.pageobject.htmlelements.Input;
+import project.tools.pageobject.AbstractWebPage;
 import project.tools.utils.WebElementUtils;
 
-public class LoginPage extends GenericPage{
+public class HomePage extends AbstractWebPage {
 
     @FindBy(id = "username")
     private WebElement usernameField;
@@ -27,6 +28,6 @@ public class LoginPage extends GenericPage{
 
     @Override
     protected void waitUntilLoaded() {
-        tryWaitUntil(() -> WebElementUtils.isClickable(usernameField));
+        tryWaitUntil(() -> WebElementUtils.isElementClickable(usernameField));
     }
 }

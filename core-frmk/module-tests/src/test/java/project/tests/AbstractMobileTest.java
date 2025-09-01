@@ -12,7 +12,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import project.app.Mobile;
 import project.tools.ConfigurationManager;
-import project.tools.pageobject.IApp;
+import project.tools.pageobject.AbstractApp;
 import project.tools.reports.BaseHTMLReporter;
 
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static project.tools.ConfigurationManager.*;
-import static project.tools.browser.Browser.quitAllDrivers;
-import static project.tools.pageobject.mobile.AbstractMobileApp.getIOSDriver;
+import static project.tools.drivers.Drivers.quitAllDrivers;
+import static project.tools.pageobject.AbstractMobileApp.getIOSDriver;
 
 public abstract class AbstractMobileTest extends GenericTest implements IAppTest {
 
@@ -140,7 +140,7 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
     }
 
     @Override
-    public IApp getTestedAppInstance() {
+    public AbstractApp getTestedAppInstance() {
         return mobile;
     }
 }

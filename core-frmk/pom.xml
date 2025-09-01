@@ -9,7 +9,6 @@
 
   <modules>
     <module>module-app</module>
-    <module>module-data</module>
     <module>module-tests</module>
     <module>module-tools</module>
   </modules>

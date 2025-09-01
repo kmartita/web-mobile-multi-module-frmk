@@ -3,22 +3,22 @@ package project.tests.web;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import project.tests.AbstractWebTest;
-import project.web.page.LoginPage;
+import project.web.pages.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginWebTest extends AbstractWebTest {
+public class HomeWebTest extends AbstractWebTest {
 
-    private LoginPage loginPage;
+    private HomePage homePage;
 
     @BeforeClass
     public void beforeTest() {
-        loginPage = web.openLoginPage();
+        homePage = web.openHomePage();
     }
 
     @Test
     public void verifyPageIsLoaded() {
-        assertThat(loginPage.isOpened())
+        assertThat(homePage.isOpened())
                 .as("Login page should be opened.")
                 .isTrue();
     }

@@ -1,8 +1,7 @@
 package project.tests;
 
-import project.tools.pageobject.IApp;
+import project.tools.pageobject.AbstractApp;
 
 public interface IAppTest {
-
-    IApp getTestedAppInstance();
+    AbstractApp getTestedAppInstance();
 }

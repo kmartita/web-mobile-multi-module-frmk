@@ -3,14 +3,9 @@ package project.tools.utils;
 import com.google.common.base.Stopwatch;
 import io.qameta.allure.Allure;
 import lombok.experimental.UtilityClass;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 @UtilityClass
 public final class WaitUtil {
@@ -20,10 +15,7 @@ public final class WaitUtil {
 
     public static final int DEFAULT_POLLING_INTERVAL_MS = 300;
 
-    public static final int DEFAULT_TIMEOUT_TO_CLICK = 10;
     public static final int DEFAULT_TIMEOUT_TO_WAIT = 40;
-    public static final int LONG_TIMEOUT_TO_WAIT = 120;
-    public static final int MIDDLE_TIMEOUT_TO_WAIT = 20;
     public static final int SHORT_TIMEOUT_TO_WAIT = 5;
 
     public static boolean retryUntilTrue(Callable<Boolean> callable, String message) {

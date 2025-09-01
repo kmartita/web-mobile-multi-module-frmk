@@ -2,24 +2,24 @@ package project.tests.mobile;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import project.mobile.screen.LoginScreen;
+import project.mobile.screens.HomeScreen;
 import project.tests.AbstractMobileTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginMobileTest extends AbstractMobileTest {
+public class HomeMobileTest extends AbstractMobileTest {
 
-    private LoginScreen loginScreen;
+    private HomeScreen homeScreen;
 
     @BeforeClass
     public void beforeTest() {
-        loginScreen = mobile.openLoginScreen();
+        homeScreen = mobile.openHomeScreen();
     }
 
     @Test
     public void verifyScreenIsLoaded() {
-        assertThat(loginScreen.isOpened())
-                .as("Login screen should be opened.")
+        assertThat(homeScreen.isOpened())
+                .as("Home screen should be opened.")
                 .isTrue();
     }
 }

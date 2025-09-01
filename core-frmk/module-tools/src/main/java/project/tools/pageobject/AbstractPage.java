@@ -34,24 +34,16 @@ public abstract class AbstractPage {
         return getWebDriverWait(DEFAULT_TIMEOUT_TO_WAIT);
     }
 
-    protected boolean shortWaitUntil(Supplier<Boolean> condition) {
-        return getWebDriverWait(SHORT_TIMEOUT_TO_WAIT).until(AdditionalConditions.isTrue(condition));
+    protected void shortWaitUntil(Supplier<Boolean> condition) {
+        getWebDriverWait(SHORT_TIMEOUT_TO_WAIT).until(AdditionalConditions.isTrue(condition));
     }
 
     protected void waitUntil(Supplier<Boolean> condition) {
         getWebDriverWait().until(AdditionalConditions.isTrue(condition));
     }
 
-    protected boolean waitUntil(Supplier<Boolean> condition, int seconds) {
-        return getWebDriverWait(seconds).until(AdditionalConditions.isTrue(condition));
-    }
-
-    protected boolean tryShortWaitUntil(Supplier<Boolean> condition) {
-        try {
-            return shortWaitUntil(condition);
-        } catch (TimeoutException e) {
-            return false;
-        }
+    protected void waitUntil(Supplier<Boolean> condition, int seconds) {
+        getWebDriverWait(seconds).until(AdditionalConditions.isTrue(condition));
     }
 
     protected void tryWaitUntil(Supplier<Boolean> condition) {
@@ -62,11 +54,11 @@ public abstract class AbstractPage {
         }
     }
 
-    protected boolean tryWaitUntil(Supplier<Boolean> condition, int seconds) {
+    protected void tryWaitUntil(Supplier<Boolean> condition, int seconds) {
         try {
-            return waitUntil(condition, seconds);
+            waitUntil(condition, seconds);
         } catch (TimeoutException e) {
-            return false;
+            // Just return control to the calling code
         }
     }
 

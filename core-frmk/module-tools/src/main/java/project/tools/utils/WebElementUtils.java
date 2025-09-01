@@ -17,8 +17,8 @@ import static project.tools.utils.WaitUtil.DEFAULT_TIMEOUT_TO_WAIT;
 @UtilityClass
 public final class WebElementUtils {
 
-    private WebDriverWait webDriverWait(WebElement element, long timeInSeconds) {
-        WebDriverWait waiter = new WebDriverWait(unpackWebDriverFromSearchContext(element), Duration.ofSeconds(timeInSeconds));
+    private WebDriverWait webDriverWait(WebElement element) {
+        WebDriverWait waiter = new WebDriverWait(unpackWebDriverFromSearchContext(element), Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT));
         waiter.ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
         return waiter;
     }
@@ -50,9 +50,9 @@ public final class WebElementUtils {
         }
     }
 
-    public boolean isClickable(WebElement element) {
+    public boolean isElementClickable(WebElement element) {
         try {
-            webDriverWait(element, DEFAULT_TIMEOUT_TO_WAIT).until(ExpectedConditions.elementToBeClickable(element));
+            webDriverWait(element).until(ExpectedConditions.elementToBeClickable(element));
             return true;
         } catch (Exception e) {
             return false;

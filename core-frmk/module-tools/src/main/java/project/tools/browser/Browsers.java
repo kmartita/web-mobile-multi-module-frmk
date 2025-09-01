@@ -19,8 +19,9 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static java.lang.String.join;
+import static project.tools.Platform.THIS_OS;
 
-public enum BrowserType implements IBrowserType {
+public enum Browsers implements IBrowser {
 
     FIREFOX {
         private static final String GECKO_DRIVER_PATH_VARIABLE = "webdriver.gecko.driver";
@@ -41,7 +42,7 @@ public enum BrowserType implements IBrowserType {
             FirefoxOptions options = getCapabilities();
             WebDriverManager.firefoxdriver().setup();
             WebDriver localDriver = new FirefoxDriver(options);
-            BrowserType.setDimension(localDriver);
+            Browsers.setDimension(localDriver);
             return localDriver;
         }
 
@@ -99,7 +100,7 @@ public enum BrowserType implements IBrowserType {
             WebDriverManager.chromedriver().clearResolutionCache().setup();
 
             WebDriver localDriver = new ChromeDriver(options);
-            BrowserType.setDimension(localDriver);
+            Browsers.setDimension(localDriver);
             localDriver.manage().window().maximize();
             return localDriver;
         }
@@ -148,7 +149,7 @@ public enum BrowserType implements IBrowserType {
     }
 
     private static String getOsDir() {
-        String os = System.getProperty("os.name").toLowerCase();
+        String os = THIS_OS.toString().toLowerCase();
 
         switch (os) {
             case "windows":
@@ -169,8 +170,8 @@ public enum BrowserType implements IBrowserType {
         return osArch.contains("64") ? "64bit" : "32bit";
     }
 
-    public static BrowserType from(String browser) {
-        return Arrays.stream(BrowserType.values())
+    public static Browsers from(String browser) {
+        return Arrays.stream(Browsers.values())
                 .filter(value -> value.isKnownAs(browser.trim().toLowerCase()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(format("\nUnsupported browser: '%s'\n", browser)));

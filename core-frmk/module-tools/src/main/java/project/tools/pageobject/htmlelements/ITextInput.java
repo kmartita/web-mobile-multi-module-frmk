@@ -1,4 +1,4 @@
-package project.tools.pageobject.element;
+package project.tools.pageobject.htmlelements;
 
 import project.tools.pageobject.GuiElement;
 

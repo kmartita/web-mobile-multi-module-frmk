@@ -2,7 +2,7 @@ package project.tools;
 
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
-import project.tools.browser.BrowserType;
+import project.tools.browser.Browsers;
 
 import java.io.File;
 import java.nio.file.FileSystems;
@@ -16,8 +16,8 @@ import static project.tools.EnvManager.APP_NAME;
 @UtilityClass
 public class ConfigurationManager {
 
-    private static final String MOBILE_PLATFORM_VARIABLE = "mobile";
-    private static final String IS_REMOTE_VARIABLE = "remote";
+    public static final String MOBILE_PLATFORM_VARIABLE = "mobile";
+    //private static final String IS_REMOTE_VARIABLE = "remote";
     private static final String BROWSER_SYSTEM_VARIABLE = "browser";
     private static final String APP_PATH_VARIABLE = "appPath";
     private static final String ENVIRONMENT_SYSTEM_VARIABLE = "env";
@@ -30,14 +30,18 @@ public class ConfigurationManager {
     public static final String APPIUM_URL_VARIABLE = "appiumURL";
     private static final String APP_BUNDLE_ID_VARIABLE = "bundleId";
 
-    private static final String DEFAULT_IOS_VERSION = "16.2";
-    private static final List<String> SUPPORTED_IOS_VERSIONS = Arrays.asList("16.2", "18.1");
-    private static final String DEVICE_NAME = "iPad Pro (11-inch) (4th generation)";
+    //private static final String DEFAULT_IOS_VERSION = "16.2";
+    private static final String DEFAULT_IOS_VERSION = "18.6";
+    private static final List<String> SUPPORTED_IOS_VERSIONS = Arrays.asList("16.2", "18.6");
 
-    public static boolean isRemote() {
+
+    //private static final String DEVICE_NAME = "iPad Pro (11-inch) (4th generation)";
+    private static final String DEVICE_NAME = "iPad (A16)";
+
+   /* public static boolean isRemote() {
         String remoteValue = System.getProperty(IS_REMOTE_VARIABLE);
         return Boolean.parseBoolean(remoteValue);
-    }
+    }*/
 
     public static Platform getPlatform() {
         Platform platform = Platform.THIS_OS;
@@ -53,12 +57,12 @@ public class ConfigurationManager {
         return System.getProperty(BROWSER_SYSTEM_VARIABLE);
     }
 
-    public static BrowserType getDriverType() {
-        BrowserType driverType = BrowserType.CHROME;
+    public static Browsers getDriverType() {
+        Browsers driverType = Browsers.CHROME;
         String browserName = getBrowserName();
 
         if (!StringUtils.isEmpty(browserName)) {
-            driverType = BrowserType.from(browserName);
+            driverType = Browsers.from(browserName);
         }
 
         System.out.printf("BROWSER: '%s'\n", driverType);
@@ -123,6 +127,8 @@ public class ConfigurationManager {
         }
     }
 
+
+//TODO - ?
     public static int getMobileSessionTimeoutVariable() {
         String mobileTimeout = System.getProperty(MOBILE_SESSION_TIMEOUT_VARIABLE);
         if (!StringUtils.isEmpty(mobileTimeout))

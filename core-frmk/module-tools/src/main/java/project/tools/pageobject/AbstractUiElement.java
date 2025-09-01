@@ -15,17 +15,17 @@ import project.tools.utils.WebElementUtils;
 
 import static project.tools.utils.WaitUtil.DEFAULT_TIMEOUT_TO_WAIT;
 
-public abstract class AbstractGuiElement extends Widget implements GuiElement {
+public abstract class AbstractUiElement extends Widget implements GuiElement {
 
     protected String name;
     private FluentWait<WebDriver> waiter;
 
-    public AbstractGuiElement(WebElement element) {
+    public AbstractUiElement(WebElement element) {
         super(element);
         PageFactory.initElements(new AppiumFieldDecorator(element), this);
     }
 
-    public AbstractGuiElement(WebElement wrappedElement, String name) {
+    public AbstractUiElement(WebElement wrappedElement, String name) {
         this(wrappedElement);
         this.name = name;
     }

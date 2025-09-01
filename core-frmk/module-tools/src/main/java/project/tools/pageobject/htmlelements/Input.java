@@ -1,18 +1,18 @@
-package project.tools.pageobject.element;
+package project.tools.pageobject.htmlelements;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import project.tools.pageobject.AbstractGuiElement;
+import project.tools.pageobject.AbstractUiElement;
 import project.tools.utils.WebElementUtils;
 
 import java.util.Optional;
 
 import static project.tools.TagsAndAttributes.VALUE_ATTR;
 
-public class Input extends AbstractGuiElement implements ITextInput {
+public class Input extends AbstractUiElement implements ITextInput {
 
     public Input(WebElement element) {
         super(element);
