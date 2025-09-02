@@ -8,12 +8,13 @@ import org.testng.asserts.SoftAssert;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlTest;
 import project.tools.reports.BaseHTMLReporter;
+import project.tools.reports.TestListener;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Listeners(BaseHTMLReporter.class)
+@Listeners(TestListener.class)
 public abstract class GenericTest implements IAppTest {
 
     // AssertJ soft assert

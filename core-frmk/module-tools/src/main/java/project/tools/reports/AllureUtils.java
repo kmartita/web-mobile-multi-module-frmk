@@ -1,5 +1,6 @@
 package project.tools.reports;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
@@ -21,33 +22,26 @@ public final class AllureUtils {
         Reporter.log("\nLOG - " + step, true);
     }
 
-    @Attachment(value = "{0}", type = "image/jpg")
-    public static synchronized byte[] makeScreenshot(String ignoredName, WebDriver driver) {
-        byte[] imageAsBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-
-        try (ByteArrayInputStream bais = new ByteArrayInputStream(imageAsBytes);
-             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-
+    public static synchronized byte[] makeScreenshot(WebDriver driver) {
+        try {
+            byte[] originalBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            ByteArrayInputStream bais = new ByteArrayInputStream(originalBytes);
             BufferedImage originalImage = ImageIO.read(bais);
 
-            // Scale the image
             int scaledWidth = (int) (originalImage.getWidth() * 0.5);
             int scaledHeight = (int) (originalImage.getHeight() * 0.5);
 
-            // Create a new scaled image
             BufferedImage scaledImage = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
             Graphics2D g2d = scaledImage.createGraphics();
             g2d.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
             g2d.dispose();
 
-            // Write to a new byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(scaledImage, "jpg", baos);
-            baos.flush();
             return baos.toByteArray();
 
         } catch (IOException e) {
-            System.err.printf("Failed to create screenshot: %s", e.getMessage());
-            e.printStackTrace(System.err);
+            System.err.printf("In AllureUtils#takeScreenshot: %s\n", e.getMessage());
             return null;
         }
     }

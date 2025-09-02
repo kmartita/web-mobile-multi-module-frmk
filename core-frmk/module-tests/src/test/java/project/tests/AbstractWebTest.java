@@ -18,14 +18,9 @@ import static project.tools.ConfigurationManager.*;
 import static project.tools.EnvManager.BASE_URL;
 import static project.tools.drivers.Drivers.quitAllDrivers;
 
-public abstract class AbstractWebTest extends GenericTest implements IAppTest {
+public abstract class AbstractWebTest extends GenericTest {
 
     protected static final Web web = new Web();
-
-    @Override
-    public AbstractApp getTestedAppInstance() {
-        return web;
-    }
 
     @BeforeSuite(alwaysRun = true)
     public void suiteSetup(ITestContext context) {
@@ -82,5 +77,10 @@ public abstract class AbstractWebTest extends GenericTest implements IAppTest {
         envData.put("Base URL:", BASE_URL);
 
         AllureEnv.createAllureEnvironmentFile(envData);
+    }
+
+    @Override
+    public AbstractApp getTestedAppInstance() {
+        return web;
     }
 }

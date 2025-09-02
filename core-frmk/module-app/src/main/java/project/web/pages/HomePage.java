@@ -4,30 +4,29 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import project.tools.pageobject.htmlelements.ILabel;
 import project.tools.pageobject.htmlelements.ITextInput;
 import project.tools.pageobject.htmlelements.Input;
 import project.tools.pageobject.AbstractWebPage;
+import project.tools.pageobject.htmlelements.Label;
 import project.tools.utils.WebElementUtils;
 
 public class HomePage extends AbstractWebPage {
 
-    @FindBy(id = "username")
-    private WebElement usernameField;
+    @FindBy(css = "img[alt='Selenium Online Training']")
+    private WebElement logo;
 
-    @FindBy(id = "password")
-    private WebElement passwordField;
-
-    public ITextInput passwordField() {
-        return new Input(passwordField, "Password field");
+    public ILabel logo() {
+        return new Label(logo, "'Selenium Online Training' img");
     }
 
     public boolean isOpened(){
-        Allure.step("Check is \"Password field\" present");
-        return passwordField().isShown();
+        Allure.step("Check is \"Selenium Online Training\" image present");
+        return logo().isShown();
     }
 
     @Override
     protected void waitUntilLoaded() {
-        tryWaitUntil(() -> WebElementUtils.isElementClickable(usernameField));
+        tryWaitUntil(() -> WebElementUtils.isElementClickable(logo));
     }
 }

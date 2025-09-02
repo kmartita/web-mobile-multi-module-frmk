@@ -1,7 +1,6 @@
 package project.tools.pageobject;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import project.tools.ConfigurationManager;
 import project.tools.Platform;
@@ -33,11 +32,11 @@ public abstract class AbstractApp {
 
     public static WebDriver getInstanceDriver() {
         Platform platform = ConfigurationManager.getPlatform();
-        switch(platform) {
-            case IOS : return getMobileDriver();
-            case THIS_OS : return getBrowserDriver();
-            default : throw new RuntimeException(String.format("\nPlatform [%s] is not supported\n", platform));
-        }
+        return switch (platform) {
+            case IOS -> getMobileDriver();
+            case THIS_OS -> getBrowserDriver();
+            default -> throw new RuntimeException(String.format("\nPlatform '%s' is not supported\n", platform));
+        };
     }
 
     public static void closeMobile() {
@@ -54,24 +53,3 @@ public abstract class AbstractApp {
         WEB.remove();
     }
 }
-
-     /*public static ThreadLocal<Browser> getBrowserInstance() {
-        Platform platform = ConfigurationManager.getPlatform();
-        switch(platform) {
-            case IOS : return getMobile();
-            case THIS_OS : return getBrowser();
-            default : throw new RuntimeException(String.format("\nPlatform [%s] is not supported\n", platform));
-        }
-    }*/
-
-    /*public static boolean isDriverExisted() {
-        return getBrowserInstance().get().isOpened();
-    }
-*/
-    /*@Override
-    public File getScreenshot() {
-        if (isDriverExisted()) {
-            return ((TakesScreenshot) getInstanceDriver()).getScreenshotAs(OutputType.FILE);
-        }
-        return null;
-    }*/

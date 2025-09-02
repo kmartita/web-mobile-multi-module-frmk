@@ -4,7 +4,7 @@ import com.github.rsheremeta.AllureEnv;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
-import io.qameta.allure.Step;
+import io.qameta.allure.Allure;
 import org.apache.commons.lang.time.StopWatch;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -19,13 +19,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static project.tools.ConfigurationManager.*;
 import static project.tools.drivers.Drivers.quitAllDrivers;
 import static project.tools.pageobject.AbstractMobileApp.getIOSDriver;
 
-public abstract class AbstractMobileTest extends GenericTest implements IAppTest {
+public abstract class AbstractMobileTest extends GenericTest {
 
     protected final Mobile mobile = new Mobile();
     private AppiumDriverLocalService service = null;
@@ -42,6 +41,7 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
     }
 
     private void startAppiumServer() {
+        Allure.step("Start Appium server");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error")
                 .usingPort(4723);
@@ -53,6 +53,7 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
     }
 
     private void stopAppiumServer() {
+        Allure.step("Stop Appium server");
         if (service != null && service.isRunning()) {
             service.stop();
             System.out.println("Appium server stopped.");
