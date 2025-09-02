@@ -70,7 +70,6 @@ public abstract class AbstractWebTest extends GenericTest {
         System.out.printf("Is fully automated: %s%n", isFullyAutomated());
 
         Map<String, String> envData = new HashMap<>();
-        envData.put("Approach:", "WEB");
         envData.put("Platform:", getPlatform().toString());
         envData.put("Environment:", getEnvironment().name());
         envData.put("Browser:", getBrowser().toString());

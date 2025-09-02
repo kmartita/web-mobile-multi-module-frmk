@@ -142,11 +142,12 @@ Replace `<device-ip>` with the IP address of your iOS device while ensuring that
 #### Build Test Application:
 1. Clone (or use option 'Open with Xcode') the project (iOS app for testing) from this [GitHub repository](https://github.com/kmartita/xcode-test-app).
    This is a simple 'Hello World!' application for iOS devices using Swift 6.1.2, created for testing purposes with Appium.
-2. Select a iOS simulator (e.g., `iPad (A16)`) in Xcode and build application. After a successful build, the .app file will appear in `DerivedData`:<br/>
+2. Select a iOS simulator (e.g., `iPad (A16)`) in Xcode and build application. After a successful build, the `.app` file will appear in `DerivedData`:<br/>
 ```text
    ~/Library/Developer/Xcode/DerivedData/YourProject-XXXXXX/Build/Products/Debug-iphonesimulator/TestApp.app
 ```
 
+#### As a result, the following should be achieved:
 <img width="1213" height="652" alt="TestApp-Xcode" src="https://github.com/user-attachments/assets/1ad96c6f-0cb7-42c0-9c69-11c4fae832ef" />
 <img width="1053" height="824" alt="TestApp-Simulator" src="https://github.com/user-attachments/assets/ee8dfa19-bfa5-489a-9e4e-23fcb9417bfa" />
 
@@ -157,15 +158,9 @@ This template provides a UI test automation solution suitable for both web and m
 ```
 |———core-frmk
     |—-pom.xml
-    |—-.env
-    |—-app
-        |—-[APP_NAME].app
+    |—-config
+        |—-.env
     |—-module-app
-        |—-pom.xml
-        |—-src
-            |—-main
-                |—-java
-    |—-module-data
         |—-pom.xml
         |—-src
             |—-main
@@ -176,8 +171,7 @@ This template provides a UI test automation solution suitable for both web and m
             |—-test
                 |—-java
                     |—-resources
-                        |—-suites
-                            |—-testng.xml
+                        |—-testng.xml
                         |—-allure.properties
     |—-module-tools
         |—-pom.xml
@@ -185,14 +179,11 @@ This template provides a UI test automation solution suitable for both web and m
             |—-main
                |—-java
 ```
-1. **Root Module (core-frmk)**. Serves as the parent ***pom.xml*** for all submodules. Contains common dependencies and configurations for the entire project structure. Defines four modules that are part of the project: module-app, module-data, module-tests, and module-tools.<br/>
-    - ***.env*** file is a text file used for storing configuration settings and environment variables in a project. It allows you to easily manage configuration parameters such as APPIUM_URL, REMOTE_URL, BASE_URL, APP_NAME, and APP_BUNDLE_ID without hardcoding them directly in the code.<br/>
-    - the local ***app*** directory contains the last build of the iOS app.<br/>
+1. **Root Module (`core-frmk`)**. The parent project that defines shared dependencies, plugin configurations, and manages overall builds. Contains the `config` directory, where environment variables (`.env` files of various extensions) are stored for easy configuration management.<br/>
 2. **Modules**:
-    - ***module-app***. The main module contains the application page-object classes and custom UI elements. Depends on `module-data` for data access and `module-tools` for utilizing utilities or tools.<br/>
-    - ***module-data***. It should contain code for data operations, such as database access or data manipulation (data providers, data generators, data models, etc). Depends on `module-tools`.<br/>
-    - ***module-tools***. A module designed to provide common utilities and functions (Selenium wrappers, Reporters, and other generic libraries) that can be used across many other modules. The most "general" module that supports other modules by providing shared functionality.<br/>
-    - ***module-tests***. This module contains implemented test cases to verify the functionality of web pages and mobile screens, and the ***testng.xml*** file is a configuration file that helps organize the test classes. Depends on `module-app` and `module-data`, allowing for testing their functionality in a controlled environment.<br/>
+   - `module-app`. The main module containing page object classes, UI components, and core application logic. It depends on **module-tools** for shared utilities and design pattern implementations.<br/>
+   - `module-tools`. A utility module providing shared helpers, including support for browser configuration and Selenium integration, scalable Page Object pattern implementations, report generation, logging, and other common functions used across modules.<br/>
+   - `module-tests`. This module contains test classes and test configurations (`testng.xml`). It depends on **module-app** to access page objects and perform web UI testing in a controlled environment.<br/>
 
 <a id="two-one"></a>
 #### 2.1. Configuring project
@@ -204,11 +195,13 @@ mvn clean install -U -DskipTests=true
 
 <a id="three"></a>
 ### 3. Tests Execution
-Maven is used as a tool for building and managing the project, and additional options have been added for executing the tests.<br/>
-*Options:*<br/>
-`-Denv={String}` - environment for execution test;<br/>
-`-Dbrowser={String}` - name of Browser on which should be executed web test;<br/>
-`-Dtest={String}` - name of Test class.<br/>
+Maven is used as the build and test management tool, with additional options for test configuration:<br/>
+`-Denv={String}`  specifies the environment for test execution (default: `test`)<br/>
+`-Dbrowser={String}` - defines the browser to run web tests on (default: `chrome`)<br/>
+`-DiOS={int}` - defines the iOS version to run mobile tests on (default: the version set in Xcode).
+-`Ddevice={String}` - defines the name of device for run mobile tests on (default: the name set in Xcode)
+`-Dthreads={int}` -  specifies the number of threads for parallel test execution<br/>
+`-Dtest={String}` - the specific test class to run<br/>
 
 ##### Common Maven Commands:
 1. Removes the `target` directory before running tests. Ensures that previous results do not affect the Allure report.
@@ -230,29 +223,48 @@ mvn clean test
 #### 3.1. Web:
 Create a hidden `.env` file containing the `BASE_URL` parameter to configure the web URL for testing. This will allow you to easily manage the base URL used during your web tests.<br/>
 ```properties
-BASE_URL = https://example.com
+BASE_URL = https://demoqa.com
 ```
-To execute the web test itself the next command line should be used:<br/>
+
+#### Supported Browsers:
+* Google Chrome
+* Mozilla Firefox
+* Safari [Mac OS X]
+
+#### Usage web examples:
+To execute a specific test with default settings the next command line should be used:<br/>
 ```bash
-cd core-frmk
-mvn clean test -Denv=local -Dtest=LoginWebTest -Dbrowser=firefox
+mvn clean test -Dtest=HomeWebTest
+```
+To execute a test with custom options the next command line should be used:<br/>
+```bash
+mvn clean test -Dtest=HomeWebTest -Dbrowser=firefox -Denv=dev
+```
+To execute tests in parallel with `testng.xml` the next command line should be used:<br/>
+```bash
+mvn clean test -DsuiteFile=src/test/resources/suites/web.xml -Dthreads=3
 ```
 
 <a id="three-two"></a>
 #### 3.2. Mobile:
 Create a hidden `.env` file containing the parameters `APPIUM_URL`, `APP_NAME`, and `APP_BUNDLE_ID` to configure the testing environment for mobile tests.<br/>
-Place your iOS application (e.g., 'Demo.app') into the local `app` directory.<br/>
+Place your builded iOS application (e.g., `TestApp.app`) from `DerivedData` folder into the local `app` directory.<br/>
 The `APP_BUNDLE_ID` is a unique bundle identifier for a mobile application on the iOS or Android platform. This identifier is used to differentiate apps in systems and services such as the App Store or Google Play.<br/>
 ```properties
 APPIUM_UR = http://0.0.0.0:4723/
-APP_NAME = "Demo.app"
-APP_BUNDLE_ID = com.example.myapp
+APP_NAME = "TestApp.app"
+APP_BUNDLE_ID = com.kmartita
 ```
 To execute the mobile test itself the next command line should be used:<br/>
 ```bash
 cd core-frmk
-mvn clean test -Denv=regression -Dtest=LoginMobileTest
+mvn clean test -Denv=dev -Dtest=HomeMobileTest -DiOS=18.6 -Ddevice="iPad Pro 13-inch (M4)"
 ```
+#### Supported iOS Simulators (bby default):
+* iPad (A16) - iOS 18.6
+
+#### List of available devices:
+//TOD_ -devices
 
 <a id="four"></a>
 ### 4. Generate and Review Allure Report
@@ -269,20 +281,17 @@ mvn allure:serve
 This command starts a local web server and automatically opens the generated report in your default browser.<br/>
 
 An example of the generated [Allure TestNG](https://allurereport.org/docs/testng/) report looks like this:<br/>
-#### Mobile:
-<img width="1920" height="1038" alt="Mobile_Overview" src="https://github.com/user-attachments/assets/a42bc769-0b99-4792-81a4-4a9cb28f19f4" />
-<img width="1920" height="466" alt="Mobile_Packages" src="https://github.com/user-attachments/assets/cd350a01-eca5-4c62-9cca-f7bf2e413b9c" />
+#### Suites (Web & Mobile): `mvn clean test -Denv=dev`
+By default web:<br/>
+   * browser = Chrome
+By default mobile:<br/>
+   * iOS = 18.6; device = iPad (A16)
 
-#### Web:
-<img width="1920" height="1036" alt="Web_Overview" src="https://github.com/user-attachments/assets/911a14b1-7511-483c-a693-ed7dcb663ef4" />
-<img width="1920" height="450" alt="Web_Packages" src="https://github.com/user-attachments/assets/c6e77727-bddb-4830-8c2e-c065f9b66506" />
+//TODO
 
+#### Mobile: `mvn clean test -DiOS=18.6 -Ddevice="iPad Air 11-inch (M3)" -Denv=dev -DsuiteFile=src/test/resources/suites/mobile.xml`
+//TODO
 
+#### Web: `mvn clean test -Dbrowser=firefox -DsuiteFile=src/test/resources/suites/web.xml`
+//TODO
 
-### Supported Browsers:
-* Google Chrome
-* Mozilla Firefox
-* Safari [Mac OS X]
-
-### Supported iOS Simulators:
-* iPad Pro (11-inch) 4th generation - iOS 16.2

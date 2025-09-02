@@ -26,6 +26,6 @@ public class HomeMobileTest extends AbstractMobileTest {
     public void verifyScreenIsLoaded() {
         assertThat(homeScreen.isOpened())
                 .as("Home screen should be opened.")
-                .isFalse(); //test
+                .isFalse(); //for report
     }
 }

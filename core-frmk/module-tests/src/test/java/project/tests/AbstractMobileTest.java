@@ -120,7 +120,6 @@ public abstract class AbstractMobileTest extends GenericTest {
         }
 
         Map<String, String> envData = new HashMap<>();
-        envData.put("Approach:", "MOBILE");
         envData.put("Platform:", getPlatform().toString());
         envData.put("Environment:", getEnvironment().name());
         envData.put("Device:", getDevice());

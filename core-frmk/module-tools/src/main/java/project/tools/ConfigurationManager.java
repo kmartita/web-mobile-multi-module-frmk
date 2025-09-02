@@ -20,7 +20,7 @@ public class ConfigurationManager {
     private static final String APP_PATH_VARIABLE = "appPath";
     private static final String ENV_VARIABLE = "env";
     public static final String APP_NAME_VARIABLE = "testApp";
-    private static final String IOS_VERSION_VARIABLE = "iosVersion";
+    private static final String IOS_VERSION_VARIABLE = "iOS";
     private static final String DEVICE_VARIABLE = "device";
     private static final String RUN_APPIUM_VARIABLE = "runAppium";
     private static final String THREAD_COUNT_VARIABLE = "threads";

@@ -26,6 +26,6 @@ public class HomeWebTest extends AbstractWebTest {
     public void verifyPageIsLoaded() {
         assertThat(homePage.isOpened())
                 .as("Login page should be opened.")
-                .isFalse(); //test
+                .isFalse(); //for report
     }
 }
