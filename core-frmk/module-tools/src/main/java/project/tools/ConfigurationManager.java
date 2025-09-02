@@ -66,15 +66,11 @@ public class ConfigurationManager {
         String fileSeparator = FileSystems.getDefault().getSeparator();
 
         EnvType env = getEnvironment();
-        String pathToApp;
-        switch (env) {
-            case TEST :
-            case DEVELOPMENT :
-                pathToApp = join(fileSeparator, userDir, "app", System.getProperty(APP_NAME_VARIABLE, APP_NAME));
-                break;
-
-            default : throw new IllegalStateException(format("\nUnknown environment has been provided [%s].\n", env));
-        }
+        String pathToApp = switch (env) {
+            case TEST, DEVELOPMENT ->
+                    join(fileSeparator, userDir, "app", System.getProperty(APP_NAME_VARIABLE, APP_NAME));
+            default -> throw new IllegalStateException(format("\nUnknown environment has been provided [%s].\n", env));
+        };
 
         File app = new File(pathToApp);
         return app.getAbsolutePath();

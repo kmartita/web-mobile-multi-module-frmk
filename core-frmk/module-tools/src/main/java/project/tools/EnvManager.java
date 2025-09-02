@@ -29,16 +29,10 @@ public class EnvManager {
     private static Dotenv loadEnvFile(EnvType env) {
         String baseDir = Paths.get(PathToFile.getRootOfProject(), "config").toString();
 
-        String filename;
-        switch (env) {
-            case DEVELOPMENT:
-                filename = ".env.dev";
-                break;
-            case TEST:
-            default:
-                filename = ".env.test";
-                break;
-        }
+        String filename = switch (env) {
+            case DEVELOPMENT -> ".env.dev";
+            case TEST -> ".env.test";
+        };
 
         return Dotenv.configure()
                 .directory(baseDir)

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class PathToFile {
 
-    private static final List<String> modules = Arrays.asList("module-app", "module-tools", "module-tests", "module-data");
+    private static final List<String> modules = Arrays.asList("module-app", "module-tools", "module-tests");
 
     public static String getRootOfProject() {
         Path path = Paths.get(Objects.requireNonNull(PathToFile.class.getClassLoader().getResource(".")).getPath());
