@@ -87,7 +87,7 @@ appium-doctor --ios
 #### Build [WebDriverAgent (WDA) in Xcode](https://docs.katalon.com/katalon-studio/manage-projects/set-up-projects/mobile-testing/ios/mobile-install-webdriveragent-for-real-ios-devices-in-katalon-studio) for iOS Application Automation using Appium.<br/>
 Building WebDriverAgent (WDA) in Xcode is crucial for using Appium to automate iOS applications. WDA is a server that allows Appium to interact with iOS devices and simulators. 
 Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xcode:<br/>
-1. Locate the WebDriverAgent Directory<br/>
+1. Locate the **WebDriverAgent** Directory<br/>
    Path typically:<br/>
    ```text
    /usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
@@ -96,7 +96,7 @@ Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xc
    ```text
    ~/.npm-global/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
    ```
-2. Open WebDriverAgent in Xcode<br/>
+2. Open **WebDriverAgent** in Xcode<br/>
    * Open Xcode<br/>
    * Select **File** -> **Open**<br/>
    * Navigate to the WebDriverAgent folder you found in the previous step<br/>
@@ -198,8 +198,8 @@ mvn clean install -U -DskipTests=true
 Maven is used as the build and test management tool, with additional options for test configuration:<br/>
 `-Denv={String}`  specifies the environment for test execution (default: `test`)<br/>
 `-Dbrowser={String}` - defines the browser to run web tests on (default: `chrome`)<br/>
-`-DiOS={int}` - defines the iOS version to run mobile tests on (default: the version set in Xcode).
--`Ddevice={String}` - defines the name of device for run mobile tests on (default: the name set in Xcode)
+`-DiOS={int}` - defines the iOS version to run mobile tests on (default: the version set in Xcode)<br/>
+-`Ddevice={String}` - defines the name of device for run mobile tests on (default: the name set in Xcode)<br/>
 `-Dthreads={int}` -  specifies the number of threads for parallel test execution<br/>
 `-Dtest={String}` - the specific test class to run<br/>
 
