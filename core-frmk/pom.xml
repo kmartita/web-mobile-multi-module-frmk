@@ -14,48 +14,110 @@
   </modules>
 
   <properties>
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
     <failIfNoTests>false</failIfNoTests>
     <suiteFile>../module-tests/src/test/resources/suites/testng.xml</suiteFile>
     <allure.max.title.length>1000</allure.max.title.length>
-    <failIfNoTests>false</failIfNoTests>
+
+    <allure.version>2.29.0</allure.version>
+    <allure-maven.version>2.12.0</allure-maven.version>
+    <aspectj.version>1.9.22</aspectj.version>
+    <testng.version>7.7.0</testng.version>
+    <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
   </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>${testng.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${allure.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.16</version>
+    </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-maven</artifactId>
+      <version>${allure-maven.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>antlr</groupId>
+          <artifactId>antlr</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.4.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.uncommons</groupId>
+      <artifactId>reportng</artifactId>
+      <version>1.1.4</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.testng</groupId>
+          <artifactId>testng</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>31.1-jre</version>
+    </dependency>
+    <!--<dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>provided</scope>
+    </dependency>-->
+  </dependencies>
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>3.13.0</version>
         <configuration>
-          <source>11</source>
-          <target>11</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <release>17</release>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.3</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>${suiteFile}</suiteXmlFile>
-          </suiteXmlFiles>
-          <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"
+          <argLine>
+            -Dfile.encoding=${project.build.sourceEncoding}
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
+          <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
           <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
           <systemPropertyVariables>
             <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
             <allure.max.title.length>${allure.max.title.length}</allure.max.title.length>
             <allure.results.directory>${project.basedir}/target/allure-results</allure.results.directory>
-            <enable.jdbc>false</enable.jdbc>
           </systemPropertyVariables>
         </configuration>
         <dependencies>
           <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.21</version>
+            <version>${aspectj.version}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -68,31 +130,12 @@
           <outputDirectory>${project.basedir}/allure-report</outputDirectory>
         </configuration>
       </plugin>
-      <!--New-->
-      <!--<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.6</version>
-        <configuration>
-          <outputEncoding>UTF-8</outputEncoding>
-          <outputDirectory>${user.dir}/allure-report</outputDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.4.1.v20170120</version>
-        <configuration>
-          <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
-        </configuration>
-      </plugin>-->
-      <!--New-->
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
-        <version>2.12.0</version>
+        <version>${allure-maven.version}</version>
         <configuration>
-          <reportVersion>2.15.0</reportVersion>
+          <reportVersion>${allure.version}</reportVersion>
           <reportDirectory>${user.dir}/allure-report</reportDirectory>
         </configuration>
         <executions>
@@ -121,6 +164,7 @@
               <arguments>
                 <argument>-rf</argument>
                 <argument>${project.basedir}/allure-results</argument>
+                <argument>${project.basedir}/allure-report</argument>
               </arguments>
             </configuration>
           </execution>
@@ -135,9 +179,9 @@
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
-        <version>2.12.0</version>
+        <version>${allure-maven.version}</version>
         <configuration>
-          <reportVersion>2.15.0</reportVersion>
+          <reportVersion>${allure.version}</reportVersion>
           <reportDirectory>${user.dir}/allure-report</reportDirectory>
           <resultsDirectory>${project.basedir}/target/allure-results</resultsDirectory>
           <properties>
@@ -161,81 +205,5 @@
     </repository>-->
   </repositories>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.qameta.allure</groupId>
-      <artifactId>allure-testng</artifactId>
-      <version>2.13.5</version>
-    </dependency>
-    <dependency>
-      <groupId>io.qameta.allure</groupId>
-      <artifactId>allure-maven</artifactId>
-      <version>2.10.0</version>
-      <exclusions>
-        <exclusion>
-          <groupId>antlr</groupId>
-          <artifactId>antlr</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>io.github.bonigarcia</groupId>
-      <artifactId>webdrivermanager</artifactId>
-      <version>5.4.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>7.7.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.uncommons</groupId>
-      <artifactId>reportng</artifactId>
-      <version>1.1.4</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.testng</groupId>
-          <artifactId>testng</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-    <!--<dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.30</version>
-      <scope>provided</scope>
-    </dependency>-->
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.19.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>31.1-jre</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.cdimascio</groupId>
-      <artifactId>java-dotenv</artifactId>
-      <version>5.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.javassist</groupId>
-      <artifactId>javassist</artifactId>
-      <version>3.23.1-GA</version>
-    </dependency>
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib-nodep</artifactId>
-      <version>3.2.7</version>
-    </dependency>
-  </dependencies>
+
 </project>

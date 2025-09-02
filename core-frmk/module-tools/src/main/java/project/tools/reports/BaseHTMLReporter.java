@@ -57,7 +57,7 @@ public class BaseHTMLReporter extends HTMLReporter implements ITestListener {
         testCaseIds.forEach(testCaseId -> {
             if (!StringUtils.isBlank(testCaseId)) {
                 int caseId = Integer.parseInt(testCaseId);
-                System.out.printf("Test Case ID: '%s', Status: PASSED.", caseId);
+                //System.out.printf("Test Case ID: '%s', Status: PASSED.\n", caseId);
             }
         });
         System.out.printf("Method: '%s', Status: PASSED.", testMethodName);

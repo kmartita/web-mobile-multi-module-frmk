@@ -17,7 +17,7 @@ public class HomeScreen extends AbstractMobileScreen {
         return new Label(helloWord, "Title");
     }
 
-    @Step
+    @Step("isOpened")
     public boolean isOpened() {
         return screenTitle().isShown();
     }

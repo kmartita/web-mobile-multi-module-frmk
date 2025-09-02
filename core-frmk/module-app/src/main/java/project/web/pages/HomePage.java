@@ -21,7 +21,7 @@ public class HomePage extends AbstractWebPage {
         return new Input(passwordField, "Password field");
     }
 
-    @Step
+    @Step("isOpened")
     public boolean isOpened(){
         return passwordField().isShown();
     }
