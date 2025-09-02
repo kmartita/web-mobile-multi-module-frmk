@@ -39,7 +39,8 @@ Requires **Java 17**, **Maven 3.9.x**, **Allure Report 2.33.x**, and **Xcode 16.
 **This guide assumes to install the following:**
 1. [Xcode](https://developer.apple.com/documentation/safari-developer-tools/installing-xcode-and-simulators) (>= v.16.4)<br/>
    * Update **Components** (Xcode -> Settings -> Components ) to the latest versions<br/>
-//TODO - Components
+<img width="828" height="553" alt="Components" src="https://github.com/user-attachments/assets/6581a929-a673-4440-8cf9-377498133fc8" />
+
 2. Appium2 with [appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver)<br/>
 3. [Appium-Doctor](https://www.npmjs.com/package/appium-doctor) (a tool for checking Appium installation). It checks if Node.js, JDK, Android SDK, and Xcode are installed.<br/>
 
@@ -128,6 +129,7 @@ Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xc
    appium --log-level debug
 ```
    * WebDriverAgent will launch automatically<br/>
+   
 9. Verify WebDriverAgent Status:<br/>
 ```html
    http://<device-ip>:8100/status
@@ -135,8 +137,7 @@ Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xc
 Replace `<device-ip>` with the IP address of your iOS device while ensuring that the device’s WDA server is running.<br/>
 
 #### As a result, your WebDriverAgent should look like this:
-//TODO - WebDriverAgent
-
+<img width="1717" height="932" alt="WebDriverAgent" src="https://github.com/user-attachments/assets/e12429ae-e4f2-4470-bcf9-bbc650285175" />
 
 #### Build Test Application:
 1. Clone (or use option 'Open with Xcode') the project (iOS app for testing) from this [GitHub repository](https://github.com/kmartita/xcode-test-app).
@@ -145,7 +146,9 @@ Replace `<device-ip>` with the IP address of your iOS device while ensuring that
 ```text
    ~/Library/Developer/Xcode/DerivedData/YourProject-XXXXXX/Build/Products/Debug-iphonesimulator/TestApp.app
 ```
-//TODO - TestApp
+
+<img width="1213" height="652" alt="TestApp-Xcode" src="https://github.com/user-attachments/assets/1ad96c6f-0cb7-42c0-9c69-11c4fae832ef" />
+<img width="1053" height="824" alt="TestApp-Simulator" src="https://github.com/user-attachments/assets/ee8dfa19-bfa5-489a-9e4e-23fcb9417bfa" />
 
 
 <a id="two"></a>
