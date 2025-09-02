@@ -1,5 +1,6 @@
 package project.tools.pageobject;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import project.tools.ConfigurationManager;
@@ -39,15 +40,15 @@ public abstract class AbstractApp {
         }
     }
 
-    @Step
     public static void closeMobile() {
+        Allure.step("Close mobile application");
         getMobile().get().quit();
         getMobile().remove();
         MOBILE.remove();
     }
 
-    @Step
     public static void closeBrowser() {
+        Allure.step("Close web application");
         getBrowser().get().quit();
         getBrowser().remove();
         WEB.remove();

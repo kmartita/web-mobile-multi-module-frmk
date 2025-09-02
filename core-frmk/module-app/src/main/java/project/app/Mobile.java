@@ -1,5 +1,6 @@
 package project.app;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Dimension;
 import project.mobile.screens.HomeScreen;
@@ -23,8 +24,8 @@ public class Mobile extends AbstractMobileApp {
         }
     }
 
-    @Step("Start iOS-application session")
     public void startIOSSession() {
+        Allure.step("Start iOS application session");
         System.setProperty(MOBILE_VARIABLE, Platform.IOS.toString());
 
         System.out.printf("PLATFORM: '%s'%n", getPlatform());
@@ -36,8 +37,8 @@ public class Mobile extends AbstractMobileApp {
         rotateDevice();
     }
 
-    @Step("Open 'Home Screen'")
     public HomeScreen openHomeScreen() {
+        Allure.step("Open 'Home Screen'");
         startIOSSession();
         return new HomeScreen();
     }

@@ -69,7 +69,6 @@ appium plugin uninstall <plugin name>
 appium
 ```
 
-3. [Appium-Doctor](https://www.npmjs.com/package/appium-doctor) (a tool for checking Appium installation). It checks if Node.js, JDK, Android SDK, and Xcode are installed.<br/>
 ##### Check the installation of Appium and dependencies:
 ```commandline
 npm install -g appium-doctor
@@ -78,7 +77,7 @@ npm install -g appium-doctor
 ```commandline
 appium-doctor --ios
 ```
-
+3. [Appium-Doctor](https://www.npmjs.com/package/appium-doctor) (a tool for checking Appium installation). It checks if Node.js, JDK, Android SDK, and Xcode are installed.<br/>
 4. Building [WebDriverAgent (WDA) in Xcode](https://medium.com/@begunova/automating-real-ios-devices-with-appium-1fa729b58f51) for iOS Application Automation using Appium.<br/>
 
 

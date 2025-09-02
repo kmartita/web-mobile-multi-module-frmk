@@ -1,5 +1,6 @@
 package project.tools.pageobject;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,25 +13,20 @@ import java.util.Set;
 
 public abstract class AbstractWebPage extends AbstractPage {
 
-    @Attachment("Current URL")
-    @Step("Reads current URL")
     public final String getCurrentUrl() {
-        return AbstractApp.getInstanceDriver().getCurrentUrl();
+        Allure.step("Read current URL");
+        Allure.attachment("data.txt", "The current URL.");
+        return "URL:\n" + AbstractApp.getInstanceDriver().getCurrentUrl();
     }
 
-    @Attachment("Page Source")
-    @Step("Reads page source")
     public final String getPageSource() {
         return "Page Source:\n" + AbstractApp.getInstanceDriver().getPageSource();
     }
 
-    @Attachment("Browser Title")
-    @Step("Reads title in the browser title bar")
     public final String getBrowserTitle() {
         return AbstractApp.getInstanceDriver().getTitle();
     }
 
-    @Step
     public final void refreshCurrentPage() {
         AbstractApp.getInstanceDriver().navigate().refresh();
         tryWaitUntil(this::isPageStateReady);
@@ -42,17 +38,14 @@ public abstract class AbstractWebPage extends AbstractPage {
 
 
     // ************** WINDOW & TAB HANDLING **************** //
-    @Step
     public final String getWindowHandle() {
         return AbstractApp.getInstanceDriver().getWindowHandle();
     }
 
-    @Step
     public Set<String> getWindowHandles() {
         return AbstractApp.getInstanceDriver().getWindowHandles();
     }
 
-    @Step
     public final void closeCurrentWindow() {
         AbstractApp.getInstanceDriver().close();
     }
@@ -61,25 +54,21 @@ public abstract class AbstractWebPage extends AbstractPage {
         AbstractApp.getInstanceDriver().switchTo().window(nameOrHandle);
     }
 
-    @Step
     public void switchToFirstWindow(){
         List<String> windows = new ArrayList<>(getWindowHandles());
         switchToWindow(windows.get(0));
     }
 
-    @Step
     public void switchToLastWindow() {
         tryWaitUntil(() -> getWindowHandles().size() > 1, 8);
         List<String> windows = new ArrayList<>(getWindowHandles());
         switchToWindow(windows.get(windows.size() - 1));
     }
 
-    @Step
     public void openNewTab() {
         getJavascriptExecutor().executeScript("window.open()");
     }
 
-    @Step
     public void switchToNextTab() {
         List<String> windowHandles = new ArrayList<>(getWindowHandles());
 
@@ -92,7 +81,6 @@ public abstract class AbstractWebPage extends AbstractPage {
         switchToWindow(windowHandles.get(nextIndex));
     }
 
-    @Step
     public void switchToPreviousTab() {
         List<String> windowHandles = new ArrayList<>(getWindowHandles());
 
@@ -105,7 +93,6 @@ public abstract class AbstractWebPage extends AbstractPage {
         switchToWindow(windowHandles.get(prevIndex));
     }
 
-    @Step
     public void switchToAnotherTab() {
         String currentWindowHandle = getWindowHandle();
         System.out.println("-" + currentWindowHandle);
@@ -131,7 +118,6 @@ public abstract class AbstractWebPage extends AbstractPage {
         getWebDriverWait().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameElement));
     }
 
-    @Step
     protected void switchToDefaultContent() {
         AbstractApp.getInstanceDriver().switchTo().defaultContent();
     }

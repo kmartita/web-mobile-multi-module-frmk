@@ -65,18 +65,15 @@ public abstract class AbstractPage {
     protected abstract void waitUntilLoaded();
 
     // ************** ALERT HANDLING **************** //
-    @Step
     public void acceptAlert() {
         tryWaitUntil(WebElementUtils::isAlertPresent);
         getAlert().accept();
     }
 
-    @Step
     public void dismissAlert() {
         getAlert().dismiss();
     }
 
-    @Step
     public String getAlertText() {
         shortWaitUntil(() -> !AbstractApp.getInstanceDriver().switchTo().alert().getText().isEmpty());
         return getAlert().getText();
@@ -86,12 +83,10 @@ public abstract class AbstractPage {
         return AbstractApp.getInstanceDriver().switchTo().alert();
     }
 
-    @Step
     public Alert waitForAlert(int seconds) {
         return getWebDriverWait(seconds).until(ExpectedConditions.alertIsPresent());
     }
 
-    @Step
     public boolean isAlertShown() {
         try {
             getAlert();

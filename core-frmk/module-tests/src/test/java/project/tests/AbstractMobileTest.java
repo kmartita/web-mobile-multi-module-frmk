@@ -30,12 +30,10 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
     protected final Mobile mobile = new Mobile();
     private AppiumDriverLocalService service = null;
 
-    @Step
     public static void removeMobileApp() {
         removeApp(getAppBundleId());
     }
 
-    @Step
     public static void removeApp(String bundleId) {
         if (getIOSDriver().isAppInstalled(bundleId)) {
             getIOSDriver().removeApp(bundleId);
@@ -43,7 +41,6 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
         }
     }
 
-    @Step
     private void startAppiumServer() {
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "error")
@@ -55,7 +52,6 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
         System.out.printf("Appium server started at: '%s'%n", service.getUrl());
     }
 
-    @Step
     private void stopAppiumServer() {
         if (service != null && service.isRunning()) {
             service.stop();
@@ -66,7 +62,6 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
     }
 
     @BeforeSuite(alwaysRun = true)
-    @Step
     public void suiteSetup(ITestContext context) {
         startAppiumServer();
         startFillClassRunResult(context);
@@ -135,7 +130,7 @@ public abstract class AbstractMobileTest extends GenericTest implements IAppTest
 
     private long getCountOfClassesByStatus(Map<String, Map<String,String>> map, String status) {
         return map.keySet().parallelStream().map(o -> map.get(o).values())
-                .collect(Collectors.toList()).parallelStream().collect(ArrayList::new, List::addAll, List::addAll)
+                .toList().parallelStream().collect(ArrayList::new, List::addAll, List::addAll)
                 .parallelStream().filter(o -> o.equals(status)).count();
     }
 

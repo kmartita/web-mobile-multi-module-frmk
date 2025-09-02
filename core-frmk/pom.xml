@@ -18,14 +18,14 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <failIfNoTests>false</failIfNoTests>
-    <suiteFile>../module-tests/src/test/resources/suites/testng.xml</suiteFile>
+    <suiteFile>../module-tests/src/test/resources/testng.xml</suiteFile>
     <allure.max.title.length>1000</allure.max.title.length>
 
     <allure.version>2.29.0</allure.version>
     <allure-maven.version>2.12.0</allure-maven.version>
-    <aspectj.version>1.9.22</aspectj.version>
+    <aspectj.version>1.9.21</aspectj.version>
     <testng.version>7.7.0</testng.version>
-    <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
   </properties>
 
   <dependencies>
@@ -33,6 +33,12 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>${testng.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.qameta.allure</groupId>
@@ -75,14 +81,8 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>31.1-jre</version>
+      <version>33.4.8-jre</version>
     </dependency>
-    <!--<dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.30</version>
-      <scope>provided</scope>
-    </dependency>-->
   </dependencies>
 
   <build>
@@ -90,7 +90,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
+        <version>3.11.0</version>
         <configuration>
           <encoding>${project.build.sourceEncoding}</encoding>
           <release>17</release>
@@ -199,11 +199,5 @@
       <name>bintray</name>
       <url>http://jcenter.bintray.com</url>
     </repository>
-    <!--<repository>
-      <id>projectlombok.org</id>
-      <url>http://projectlombok.org/mavenrepo</url>
-    </repository>-->
   </repositories>
-
-
 </project>

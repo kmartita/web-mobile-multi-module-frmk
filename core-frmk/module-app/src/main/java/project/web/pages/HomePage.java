@@ -1,5 +1,6 @@
 package project.web.pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,13 +17,12 @@ public class HomePage extends AbstractWebPage {
     @FindBy(id = "password")
     private WebElement passwordField;
 
-    @Step
     public ITextInput passwordField() {
         return new Input(passwordField, "Password field");
     }
 
-    @Step("isOpened")
     public boolean isOpened(){
+        Allure.step("Check is \"Password field\" present");
         return passwordField().isShown();
     }
 

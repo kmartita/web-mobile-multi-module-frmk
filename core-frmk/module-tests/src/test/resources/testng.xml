@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Combined Suite" >
+<suite name="Combined Suite" verbose="1">
     <suite-files>
-        <suite-file path="web.xml" />
-        <suite-file path="mobile.xml" />
+        <suite-file path="suites/web.xml" />
+        <suite-file path="suites/mobile.xml" />
     </suite-files>
 </suite>
