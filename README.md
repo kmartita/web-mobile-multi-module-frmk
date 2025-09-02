@@ -2,6 +2,7 @@
 ![Maven](https://img.shields.io/badge/maven-white?style=for-the-badge&logo=apachemaven&logoSize=auto&color=%23cc0000&cacheSeconds=3600&link=https%3A%2F%2Fmaven.apache.org)
 ![Selenium](https://img.shields.io/badge/selenium-info?style=for-the-badge&logo=selenium&logoSize=auto&color=%23d9ead3&cacheSeconds=3600&link=https%3A%2F%2Fwww.selenium.dev%2Fdocumentation%2F)
 ![Appium2.0](https://img.shields.io/badge/appium-info?style=for-the-badge&logo=appium&logoSize=auto&color=%23f4cccc&cacheSeconds=3600&link=https%3A%2F%2Fappium.io%2Fdocs%2Fen%2F2.0%2F)
+![Xcode](https://img.shields.io/badge/Xcode-info?style=for-the-badge&logo=Xcode&color=%23cfe2f3&cacheSeconds=3600)
 ![TestNG](https://img.shields.io/badge/testng-white?style=for-the-badge&logoSize=auto&color=%233d85c6&cacheSeconds=3600&link=https%3A%2F%2Ftestng.org)
 ![Allure Report](https://img.shields.io/badge/allure-white?style=for-the-badge&logoSize=auto&color=%23f1c232&cacheSeconds=3600&link=https%3A%2F%2Fallurereport.org)
 
@@ -9,18 +10,19 @@
 # Web & Mobile (iOS) Automation Demo Project: Selenium & Appium
 This multi-module Java framework for test automation has been built with Maven and utilizes Selenium and Appium for browser and mobile automation, providing fast and reliable execution of web & mobile tests with detailed reporting and integration capabilities.
 
-### Supported Platforms:
+### Tech Stack:
+- **Programming Language**: Java
+- **Build Tool**: Maven
+- **UI Automation Frameworks**: Selenium, Appium
+- **Testing Framework**: TestNG
+- **Reporting**: Allure Report
+- **IDE for iOS development**: Xcode
+
+### Requirements:
+Requires **Java 17**, **Maven 3.9.x**, **Allure Report 2.33.x**, and **Xcode 16.x** to be installed and properly configured on your local machine.<br/>
+
+### Supported Platform:
 * (Mac) OS X
-* Linux
-* Windows
-
-### Supported Browsers:
-* Google Chrome
-* Mozilla Firefox
-* Safari [Mac OS X]
-
-### Supported iOS Simulators:
-* iPad Pro (11-inch) 4th generation - iOS 16.2
 
 ## Table of Contents
 1. [Getting Started](#one)
@@ -31,13 +33,15 @@ This multi-module Java framework for test automation has been built with Maven a
    * 3.2. [Mobile:](#three-two)
 4. [Generate and Review Allure Report](#four)
 
+
 <a id="one"></a>
 ### 1. Getting Started
-Ensure you have **Java 11**, **Maven 3.9.x** and **Allure Report 2.33.x** installed and properly configured on your local machine.<br/>
-
 **This guide assumes to install the following:**
-1. [Xcode](https://developer.apple.com/documentation/safari-developer-tools/installing-xcode-and-simulators) (v.16.1)<br/>
+1. [Xcode](https://developer.apple.com/documentation/safari-developer-tools/installing-xcode-and-simulators) (>= v.16.4)<br/>
+   * Update **Components** (Xcode -> Settings -> Components ) to the latest versions<br/>
+//TODO - Components
 2. Appium2 with [appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver)<br/>
+3. [Appium-Doctor](https://www.npmjs.com/package/appium-doctor) (a tool for checking Appium installation). It checks if Node.js, JDK, Android SDK, and Xcode are installed.<br/>
 
 ##### Install Homebrew, then NodeJS, and verify versions:
 ```commandline
@@ -57,6 +61,8 @@ appium driver install <driver name>
 appium driver update <driver name>
 appium driver uninstall <driver name>
 ```
+   * *Parameter:*<br/>
+     `<driver name>` - XCUITest driver
 ##### Basic commands for working with Appium [Plugins](https://appium.io/docs/en/2.5/ecosystem/plugins/):
 ```bash
 appium plugin list
@@ -68,7 +74,6 @@ appium plugin uninstall <plugin name>
 ```commandline
 appium
 ```
-
 ##### Check the installation of Appium and dependencies:
 ```commandline
 npm install -g appium-doctor
@@ -77,8 +82,70 @@ npm install -g appium-doctor
 ```commandline
 appium-doctor --ios
 ```
-3. [Appium-Doctor](https://www.npmjs.com/package/appium-doctor) (a tool for checking Appium installation). It checks if Node.js, JDK, Android SDK, and Xcode are installed.<br/>
-4. Building [WebDriverAgent (WDA) in Xcode](https://medium.com/@begunova/automating-real-ios-devices-with-appium-1fa729b58f51) for iOS Application Automation using Appium.<br/>
+
+#### Build [WebDriverAgent (WDA) in Xcode](https://docs.katalon.com/katalon-studio/manage-projects/set-up-projects/mobile-testing/ios/mobile-install-webdriveragent-for-real-ios-devices-in-katalon-studio) for iOS Application Automation using Appium.<br/>
+Building WebDriverAgent (WDA) in Xcode is crucial for using Appium to automate iOS applications. WDA is a server that allows Appium to interact with iOS devices and simulators. 
+Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xcode:<br/>
+1. Locate the WebDriverAgent Directory<br/>
+   Path typically:<br/>
+   ```text
+   /usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
+   ```
+   Or:<br/>
+   ```text
+   ~/.npm-global/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
+   ```
+2. Open WebDriverAgent in Xcode<br/>
+   * Open Xcode<br/>
+   * Select **File** -> **Open**<br/>
+   * Navigate to the WebDriverAgent folder you found in the previous step<br/>
+   * Open **WebDriverAgent.xcodeproj**<br/>
+
+3. Select Scheme: At top left, choose **WebDriverAgentRunner** scheme<br/>
+
+4. Configure Signing<br/>
+   Ensure the project is set to use automatic signing:<br/>
+   * Click on the **WebDriverAgentRunner** in the project navigator<br/>
+   * Select the target (on the right side in the project settings)<br/>
+   * Under the **Signing & Capabilities** tab:<br/>
+     * Select your development team from the **Team** drop-down<br/>
+     * Make sure the **Automatically manage signing** option is enabled<br/>
+
+5. Connect Device<br/>
+   * Connect your physical iOS device via USB or choose a simulator<br/>
+   * In the top left corner, select your device or simulator from the device drop-down list<br/>
+
+6. Build the Project<br/>
+   * With the correct scheme selected and device input, click on **Product** in the Xcode menu.<br/>
+   * Select **Build** or press **Command + B**.<br/>
+   * Monitor the **Issue Navigator** (the triangle icon) for any errors.<br/>
+
+7. Fix Errors (if any): Resolve signing issues, dependencies, or iOS compatibility<br/>
+8. Run **WebDriverAgent Server**:<br/>
+   * Open a new terminal window<br/>
+   * Run the following commands to start the Appium server:<br/>
+```shell
+   appium --log-level debug
+```
+   * WebDriverAgent will launch automatically<br/>
+9. Verify WebDriverAgent Status:<br/>
+```html
+   http://<device-ip>:8100/status
+```
+Replace `<device-ip>` with the IP address of your iOS device while ensuring that the device’s WDA server is running.<br/>
+
+#### As a result, your WebDriverAgent should look like this:
+//TODO - WebDriverAgent
+
+
+#### Build Test Application:
+1. Clone (or use option 'Open with Xcode') the project (iOS app for testing) from this [GitHub repository](https://github.com/kmartita/xcode-test-app).
+   This is a simple 'Hello World!' application for iOS devices using Swift 6.1.2, created for testing purposes with Appium.
+2. Select a iOS simulator (e.g., `iPad (A16)`) in Xcode and build application. After a successful build, the .app file will appear in `DerivedData`:<br/>
+```text
+   ~/Library/Developer/Xcode/DerivedData/YourProject-XXXXXX/Build/Products/Debug-iphonesimulator/TestApp.app
+```
+//TODO - TestApp
 
 
 <a id="two"></a>
@@ -209,3 +276,10 @@ An example of the generated [Allure TestNG](https://allurereport.org/docs/testng
 
 
 
+### Supported Browsers:
+* Google Chrome
+* Mozilla Firefox
+* Safari [Mac OS X]
+
+### Supported iOS Simulators:
+* iPad Pro (11-inch) 4th generation - iOS 16.2

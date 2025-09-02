@@ -106,7 +106,9 @@
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
           <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
-          <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+          <argLine>
+            --add-opens=java.base/java.lang=ALL-UNNAMED
+          </argLine>
           <systemPropertyVariables>
             <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
             <allure.max.title.length>${allure.max.title.length}</allure.max.title.length>
