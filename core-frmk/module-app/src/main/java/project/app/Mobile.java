@@ -25,7 +25,7 @@ public class Mobile extends AbstractMobileApp {
 
     @Step("Start iOS-application session")
     public void startIOSSession() {
-        System.setProperty(MOBILE_PLATFORM_VARIABLE, Platform.IOS.toString());
+        System.setProperty(MOBILE_VARIABLE, Platform.IOS.toString());
 
         System.out.printf("PLATFORM: '%s'%n", getPlatform());
         System.out.printf("ENVIRONMENT: '%s'%n", getEnvironment());

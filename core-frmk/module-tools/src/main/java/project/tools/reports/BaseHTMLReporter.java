@@ -2,7 +2,6 @@ package project.tools.reports;
 
 import io.qameta.allure.TmsLink;
 import io.qameta.allure.TmsLinks;
-import lombok.Getter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.velocity.VelocityContext;
@@ -34,8 +33,11 @@ public class BaseHTMLReporter extends HTMLReporter implements ITestListener {
         return context;
     }
 
-    @Getter
     private static final Map<String, Map<String,String>> mapWithTestAndClasses = new HashMap<>();
+
+    public static Map<String, Map<String, String>> getMapWithTestAndClasses() {
+        return mapWithTestAndClasses;
+    }
 
     @Override
     public void onTestStart(ITestResult result) {

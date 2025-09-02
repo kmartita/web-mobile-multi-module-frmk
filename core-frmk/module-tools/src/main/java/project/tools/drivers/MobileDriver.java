@@ -45,7 +45,7 @@ public class MobileDriver {
         //caps.setCapability(MobileCapabilityType.ORIENTATION, ScreenOrientation.LANDSCAPE);
         caps.setCapability(IOSMobileCapabilityType.SHOW_XCODE_LOG, false);
         caps.setCapability(MobileCapabilityType.LANGUAGE, "EN");
-        caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, ConfigurationManager.getMobileSessionTimeoutVariable());
+        caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 5000);
         caps.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
         caps.setCapability(IOSMobileCapabilityType.USE_PREBUILT_WDA, false);
         caps.setCapability(IOSMobileCapabilityType.INTER_KEY_DELAY, 200);
@@ -59,7 +59,7 @@ public class MobileDriver {
         caps.setCapability("useJSONSource", true);
         caps.setCapability("forceMjsonwp", true);
         caps.setCapability("shouldTerminateApp", true);
-        if(System.getProperty(TEST_APP_NAME_VARIABLE) != null){
+        if(System.getProperty(APP_NAME_VARIABLE) != null){
             caps.setCapability("waitForQuiescence", true);
             caps.setCapability("reduceMotion", true);
             caps.setCapability("waitForIdleTimeout", 180);

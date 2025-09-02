@@ -38,11 +38,6 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>project.data</groupId>
-      <artifactId>module-data</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>7.7.0</version>

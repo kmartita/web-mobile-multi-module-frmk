@@ -46,10 +46,5 @@
       <artifactId>module-tools</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>project.data</groupId>
-      <artifactId>module-data</artifactId>
-      <version>${project.version}</version>
-    </dependency>
   </dependencies>
 </project>

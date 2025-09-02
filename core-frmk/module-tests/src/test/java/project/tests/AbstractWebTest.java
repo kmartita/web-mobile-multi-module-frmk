@@ -77,8 +77,8 @@ public abstract class AbstractWebTest extends GenericTest implements IAppTest {
         Map<String, String> envData = new HashMap<>();
         envData.put("Approach:", "WEB");
         envData.put("Platform:", getPlatform().toString());
-        envData.put("Environment:", getEnvironment());
-        envData.put("Browser:", getDriverType().toString());
+        envData.put("Environment:", getEnvironment().name());
+        envData.put("Browser:", getBrowser().toString());
         envData.put("Base URL:", BASE_URL);
 
         AllureEnv.createAllureEnvironmentFile(envData);

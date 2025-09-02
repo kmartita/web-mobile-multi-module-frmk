@@ -3,14 +3,14 @@ package project.tools.drivers;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import project.tools.ConfigurationManager;
-import project.tools.browser.Browsers;
+import project.tools.browser.IBrowser;
 
 import static java.lang.String.format;
 
 public class BrowserDriver {
 
     public static WebDriver startBrowserDriver() {
-        Browsers driver = ConfigurationManager.getDriverType();
+        IBrowser driver = ConfigurationManager.getBrowser();
         MutableCapabilities capabilities = driver.getCapabilities();
 
         try {

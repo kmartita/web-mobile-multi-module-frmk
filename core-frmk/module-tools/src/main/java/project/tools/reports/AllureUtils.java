@@ -2,7 +2,6 @@ package project.tools.reports;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
-import lombok.experimental.UtilityClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +14,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-@UtilityClass
 public final class AllureUtils {
 
     @Step("{0}")

@@ -1,5 +1,7 @@
 package project.tools;
 
+import java.util.Arrays;
+
 public enum Platform {
 
     IOS("ios"), THIS_OS(System.getProperty("os.name"));
@@ -11,14 +13,10 @@ public enum Platform {
     }
 
     public static Platform from(String string) {
-        if (string != null) {
-            String trimmed = string.trim();
-            for (Platform candidate : Platform.values()) {
-                if (trimmed.equalsIgnoreCase(candidate.name))
-                    return candidate;
-            }
-        }
-        throw new IllegalArgumentException(String.format("\nUnsupported platform: %s\n",  string));
+        return Arrays.stream(Platform.values())
+                .filter(candidate -> string.trim().equalsIgnoreCase(candidate.name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("\nUnsupported platform: %s\n", string)));
     }
 
     @Override

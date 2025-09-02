@@ -2,12 +2,10 @@ package project.tools.utils;
 
 import com.google.common.base.Stopwatch;
 import io.qameta.allure.Allure;
-import lombok.experimental.UtilityClass;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-@UtilityClass
 public final class WaitUtil {
 
     private static final String RETRY_FAILED_MESSAGE = "Exception occurred during retry condition.";
@@ -17,6 +15,8 @@ public final class WaitUtil {
 
     public static final int DEFAULT_TIMEOUT_TO_WAIT = 40;
     public static final int SHORT_TIMEOUT_TO_WAIT = 5;
+
+    private WaitUtil() {}
 
     public static boolean retryUntilTrue(Callable<Boolean> callable, String message) {
         return retryUntilTrue(callable, message, DEFAULT_TIMEOUT_TO_WAIT, DEFAULT_POLLING_INTERVAL_MS);

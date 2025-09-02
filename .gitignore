@@ -23,5 +23,5 @@ selenium_standalone_zips/**
 /selenium_standalone_binaries/**
 /selenium_standalone_zips/**
 
-core-frmk/.env
+core-frmk/config/*
 core-frmk/app/

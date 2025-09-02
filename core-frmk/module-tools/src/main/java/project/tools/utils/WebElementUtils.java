@@ -1,6 +1,5 @@
 package project.tools.utils;
 
-import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,10 +13,11 @@ import static io.appium.java_client.pagefactory.utils.WebDriverUnpackUtility.unp
 import static project.tools.TagsAndAttributes.VALUE_ATTR;
 import static project.tools.utils.WaitUtil.DEFAULT_TIMEOUT_TO_WAIT;
 
-@UtilityClass
 public final class WebElementUtils {
 
-    private WebDriverWait webDriverWait(WebElement element) {
+    private WebElementUtils() {}
+
+    private static WebDriverWait webDriverWait(WebElement element) {
         WebDriverWait waiter = new WebDriverWait(unpackWebDriverFromSearchContext(element), Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT));
         waiter.ignoring(NoSuchElementException.class).ignoring(StaleElementReferenceException.class);
         return waiter;
@@ -40,7 +40,7 @@ public final class WebElementUtils {
         }
     }
 
-    public boolean isElementEnabled(WebElement element) {
+    public static boolean isElementEnabled(WebElement element) {
         try {
             return element.isEnabled();
         } catch (NoSuchElementException e) {
@@ -50,7 +50,7 @@ public final class WebElementUtils {
         }
     }
 
-    public boolean isElementClickable(WebElement element) {
+    public static boolean isElementClickable(WebElement element) {
         try {
             webDriverWait(element).until(ExpectedConditions.elementToBeClickable(element));
             return true;
@@ -59,7 +59,7 @@ public final class WebElementUtils {
         }
     }
 
-    public boolean isAlertPresent() {
+    public static boolean isAlertPresent() {
         try {
             AbstractApp.getInstanceDriver().switchTo().alert();
             return true;
@@ -68,7 +68,7 @@ public final class WebElementUtils {
         }
     }
 
-    public String getValueOf(WebElement element) {
+    public static String getValueOf(WebElement element) {
         String value;
         if (element.getAttribute(VALUE_ATTR) == null) {
             value = StringUtils.EMPTY;
@@ -76,20 +76,20 @@ public final class WebElementUtils {
         return value;
     }
 
-    public void clear(WebElement element) {
+    public static void clear(WebElement element) {
         element.clear();
     }
 
-    public void sendKeysTo(WebElement element, String keysToSend) {
+    public static void sendKeysTo(WebElement element, String keysToSend) {
         element.sendKeys(keysToSend);
     }
 
-    public void clearAndSendKeysTo(WebElement element, String keysToSend) {
+    public static void clearAndSendKeysTo(WebElement element, String keysToSend) {
         clear(element);
         sendKeysTo(element, keysToSend);
     }
 
-    public void clickOn(WebElement element) {
+    public static void clickOn(WebElement element) {
         try {
             element.click();
         } catch (WebDriverException e) {
@@ -98,19 +98,19 @@ public final class WebElementUtils {
         }
     }
 
-    private JavascriptExecutor getJavascriptExecutor(WebElement element) {
+    private static JavascriptExecutor getJavascriptExecutor(WebElement element) {
         return (JavascriptExecutor) unpackWebDriverFromSearchContext(element);
     }
 
-    private void scrollIntoViewByCoordinate(WebElement e) {
+    private static void scrollIntoViewByCoordinate(WebElement e) {
         getJavascriptExecutor(e).executeScript("arguments[0].scrollIntoView(true); scrollBy(0,-100);", e);
     }
 
-    public void clickJS(WebElement element) {
+    public static void clickJS(WebElement element) {
         getJavascriptExecutor(element).executeScript("arguments[0].click();", element);
     }
 
-    public String getTextFrom(WebElement element) {
+    public static String getTextFrom(WebElement element) {
         String text = element.getText();
         return Strings.isNullOrEmpty(text) ? StringUtils.EMPTY : text;
     }

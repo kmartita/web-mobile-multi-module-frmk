@@ -3,6 +3,6 @@
 <suite name="Combined Suite" >
     <suite-files>
         <suite-file path="web.xml" />
-        <!--<suite-file path="mobile.xml" />-->
+        <suite-file path="mobile.xml" />
     </suite-files>
 </suite>

@@ -1,23 +1,69 @@
 package project.tools;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import lombok.experimental.UtilityClass;
 
-@UtilityClass
+import java.nio.file.Paths;
+import java.util.Arrays;
+
+import static java.lang.String.format;
+import static project.tools.ConfigurationManager.getEnvironment;
+
 public class EnvManager {
 
-    private static final Dotenv ENV = Dotenv.configure()
-            .directory(PathToFile.getRootOfProject())
-            .load();
+    private static final Dotenv dotenv;
+    static {
+        EnvType env = getEnvironment();
+        dotenv = loadEnvFile(env);
+    }
 
-    public static final String APPIUM_URL = getEnvOption("APPIUM_URL");
-    public static final String REMOTE_URL = getEnvOption("REMOTE_URL");
-    public static final String BASE_URL = getEnvOption("BASE_URL");
-    public static final String APP_NAME = getEnvOption("APP_NAME");
-    public static final String APP_BUNDLE_ID = getEnvOption("APP_BUNDLE_ID");
+    public static final String BASE_URL = get("BASE_URL");
+    public static final String APPIUM_URL = get("APPIUM_URL");
+    public static final String APP_NAME = get("APP_NAME");
+    public static final String APP_BUNDLE_ID = get("APP_BUNDLE_ID");
 
-    private static String getEnvOption(String option) {
-        String value = ENV.get(option);
-        return (value != null) ? value : System.getenv(option);
+    public static String get(String key) {
+        String value = dotenv.get(key);
+        return (value != null) ? value : System.getenv(key);
+    }
+
+    private static Dotenv loadEnvFile(EnvType env) {
+        String baseDir = Paths.get(PathToFile.getRootOfProject(), "config").toString();
+
+        String filename;
+        switch (env) {
+            case DEVELOPMENT:
+                filename = ".env.dev";
+                break;
+            case TEST:
+            default:
+                filename = ".env.test";
+                break;
+        }
+
+        return Dotenv.configure()
+                .directory(baseDir)
+                .filename(filename)
+                .load();
+    }
+
+    public enum EnvType {
+        TEST("test"), DEVELOPMENT("dev");
+
+        private final String name;
+
+        EnvType(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static EnvType from(String envStr) {
+            return Arrays.stream(EnvType.values())
+                    .filter(env -> env.getName().equalsIgnoreCase(envStr))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException(format("\nUnsupported environment: '%s'\n", envStr)));
+        }
     }
 }
