@@ -282,20 +282,27 @@ mvn allure:serve
 This command starts a local web server and automatically opens the generated report in your default browser.<br/>
 
 An example of the generated [Allure TestNG](https://allurereport.org/docs/testng/) report looks like this:<br/>
-#### Suites (Web & Mobile): 
-`mvn clean test -Denv=dev` <br/>
+#### Suites (Web & Mobile):
+```bash
+mvn clean test -Denv=dev
+```
 By default web: browser = Chrome <br/>
 By default mobile: iOS = 18.6; device = iPad (A16)<br/>
 <img width="1530" height="957" alt="suites_overview" src="https://github.com/user-attachments/assets/786561dd-917c-4b71-8d1f-175c67bf00ce" />
-<img width="1530" height="957" alt="suites_overview" src="https://github.com/user-attachments/assets/cbe79201-2873-447b-a4bd-5f6f5d533a22" />
+<img width="1412" height="572" alt="suites_behaviors" src="https://github.com/user-attachments/assets/784db419-8df3-4155-b93b-e74040220fe6" />
 
-#### Mobile: 
-`mvn clean test -DiOS=18.6 -Ddevice="iPad Air 11-inch (M3)" -Denv=dev -DsuiteFile=src/test/resources/suites/mobile.xml`
+#### Mobile:
+```bash
+mvn clean test -DiOS=18.6 -Ddevice="iPad Air 11-inch (M3)" -Denv=dev -DsuiteFile=src/test/resources/suites/mobile.xml
+```
 <img width="1420" height="804" alt="mobile_overview" src="https://github.com/user-attachments/assets/e56a435d-709b-4de1-a234-b2258e64148c" />
 <img width="1420" height="1194" alt="mobile-packages" src="https://github.com/user-attachments/assets/e9f771a7-ee4d-44ae-90be-06f487841408" />
 
 #### Web: 
-`mvn clean test -Dbrowser=firefox -DsuiteFile=src/test/resources/suites/web.xml`
+```bash
+mvn clean test -Dbrowser=firefox -DsuiteFile=src/test/resources/suites/web.xml
+```
+By default env: test
 <img width="1412" height="781" alt="web_overview" src="https://github.com/user-attachments/assets/38cb9642-0b5c-4d69-8464-b374b56fbcb7" />
 <img width="1418" height="1110" alt="web_failed" src="https://github.com/user-attachments/assets/158f7f45-a867-4289-9882-7bb439f31290" />
 
