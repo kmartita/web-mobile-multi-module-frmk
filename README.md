@@ -324,3 +324,7 @@ Env: test
 <img width="1412" height="781" alt="web_overview" src="https://github.com/user-attachments/assets/38cb9642-0b5c-4d69-8464-b374b56fbcb7" />
 <img width="1418" height="1110" alt="web_failed" src="https://github.com/user-attachments/assets/158f7f45-a867-4289-9882-7bb439f31290" />
 
+
+
+---
+#### Copyright (c) 2025 Marta Kravchuk under MIT License.
