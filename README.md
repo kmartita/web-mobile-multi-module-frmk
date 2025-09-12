@@ -200,7 +200,8 @@ mvn clean install -U -DskipTests=true
 
 <a id="two-two"></a>
 ### 2.2. Design pattern architecture:
-//TODO
+<img width="1906" height="1980" alt="design-pattern-selenium" src="https://github.com/user-attachments/assets/04aad3ae-e4f3-48a1-b19b-8af70fde68f5" />
+
 
 <a id="three"></a>
 ## 3. Tests Execution
