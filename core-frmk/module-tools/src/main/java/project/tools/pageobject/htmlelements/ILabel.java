@@ -1,7 +1,7 @@
 package project.tools.pageobject.htmlelements;
 
-import project.tools.pageobject.GuiElement;
+import project.tools.pageobject.UiElement;
 
-public interface ILabel extends GuiElement {
+public interface ILabel extends UiElement {
 
 }

@@ -1,8 +1,8 @@
 package project.tools.pageobject.htmlelements;
 
-import project.tools.pageobject.GuiElement;
+import project.tools.pageobject.UiElement;
 
-public interface ITextInput extends GuiElement {
+public interface ITextInput extends UiElement {
 
     void type(String text);
 

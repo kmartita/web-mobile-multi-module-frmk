@@ -22,15 +22,13 @@ public abstract class AbstractApp {
         return MOBILE;
     }
 
-    public static WebDriver getMobileDriver() {
-        return getMobile().get().getMobileDriver();
-    }
+    private static WebDriver getMobileDriver() { return getMobile().get().getMobileDriver(); }
 
     private static WebDriver getBrowserDriver() {
         return getBrowser().get().getBrowserDriver();
     }
 
-    public static WebDriver getInstanceDriver() {
+    public static WebDriver getDriver() {
         Platform platform = ConfigurationManager.getPlatform();
         return switch (platform) {
             case IOS -> getMobileDriver();

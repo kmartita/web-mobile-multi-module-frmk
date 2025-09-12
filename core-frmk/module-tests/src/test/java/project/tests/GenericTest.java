@@ -7,7 +7,6 @@ import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlTest;
-import project.tools.reports.BaseHTMLReporter;
 import project.tools.reports.TestListener;
 
 import java.util.HashMap;

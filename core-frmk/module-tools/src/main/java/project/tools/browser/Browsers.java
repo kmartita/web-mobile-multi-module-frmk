@@ -151,18 +151,12 @@ public enum Browsers implements IBrowser {
     private static String getOsDir() {
         String os = THIS_OS.toString().toLowerCase();
 
-        switch (os) {
-            case "windows":
-                return "windows";
-            case "linux":
-                return "linux";
-            case "mac":
-            case "mac os":
-            case "mac os x":
-                return "osx";
-            default:
-                throw new RuntimeException(String.format("\nUnknown OS: %s\n", os));
-        }
+        return switch (os) {
+            case "windows" -> "windows";
+            case "linux" -> "linux";
+            case "mac", "mac os", "mac os x" -> "osx";
+            default -> throw new RuntimeException(String.format("\nUnknown OS: %s\n", os));
+        };
     }
 
     private String getArchDir() {

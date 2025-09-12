@@ -1,7 +1,6 @@
 package project.tools.pageobject;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,12 +17,12 @@ import static project.tools.utils.WaitUtil.SHORT_TIMEOUT_TO_WAIT;
 public abstract class AbstractPage {
 
     protected AbstractPage() {
-        PageFactory.initElements(new AppiumFieldDecorator(AbstractApp.getInstanceDriver()), this);
+        PageFactory.initElements(new AppiumFieldDecorator(AbstractApp.getDriver()), this);
         waitUntilLoaded();
     }
 
     protected WebDriverWait getWebDriverWait(long timeoutInSeconds) {
-        return (WebDriverWait) new WebDriverWait(AbstractApp.getInstanceDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT))
+        return (WebDriverWait) new WebDriverWait(AbstractApp.getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT_TO_WAIT))
                 .pollingEvery(Duration.ofMillis(500))
                 .withTimeout(Duration.ofSeconds(timeoutInSeconds))
                 .ignoring(NoSuchElementException.class)
@@ -75,12 +74,12 @@ public abstract class AbstractPage {
     }
 
     public String getAlertText() {
-        shortWaitUntil(() -> !AbstractApp.getInstanceDriver().switchTo().alert().getText().isEmpty());
+        shortWaitUntil(() -> !AbstractApp.getDriver().switchTo().alert().getText().isEmpty());
         return getAlert().getText();
     }
 
     private Alert getAlert() {
-        return AbstractApp.getInstanceDriver().switchTo().alert();
+        return AbstractApp.getDriver().switchTo().alert();
     }
 
     public Alert waitForAlert(int seconds) {

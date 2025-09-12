@@ -1,12 +1,9 @@
 package project.web.pages;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import project.tools.pageobject.htmlelements.ILabel;
-import project.tools.pageobject.htmlelements.ITextInput;
-import project.tools.pageobject.htmlelements.Input;
 import project.tools.pageobject.AbstractWebPage;
 import project.tools.pageobject.htmlelements.Label;
 import project.tools.utils.WebElementUtils;

@@ -35,18 +35,12 @@ public class Drivers {
 
     private WebDriver startNewInstance() {
         Platform platform = ConfigurationManager.getPlatform();
-        WebDriver webDriver;
+        WebDriver webDriver = switch (platform) {
+            case IOS -> MobileDriver.startIosDriver();
+            case THIS_OS -> BrowserDriver.startBrowserDriver();
+            default -> throw new RuntimeException(format("Unsupported platform: %s", platform));
+        };
 
-        switch (platform) {
-            case IOS:
-                webDriver = MobileDriver.startIosDriver();
-                break;
-            case THIS_OS:
-                webDriver = BrowserDriver.startBrowserDriver();
-                break;
-            default:
-                throw new RuntimeException(format("Unsupported platform: %s", platform));
-        }
         rememberDriver(webDriver);
         return webDriver;
     }

@@ -34,7 +34,7 @@ public class MobileDriver {
         return driver;
     }
 
-    public static DesiredCapabilities iosNativeAppCapabilities() {
+    private static DesiredCapabilities iosNativeAppCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.APP, ConfigurationManager.getTestAppAbsolutePath());
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.IOS);

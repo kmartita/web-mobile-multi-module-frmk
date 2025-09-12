@@ -1,8 +1,6 @@
 package project.tools.pageobject;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
-import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,19 +14,19 @@ public abstract class AbstractWebPage extends AbstractPage {
     public final String getCurrentUrl() {
         Allure.step("Read current URL");
         Allure.attachment("data.txt", "The current URL.");
-        return "URL:\n" + AbstractApp.getInstanceDriver().getCurrentUrl();
+        return "URL:\n" + AbstractApp.getDriver().getCurrentUrl();
     }
 
     public final String getPageSource() {
-        return "Page Source:\n" + AbstractApp.getInstanceDriver().getPageSource();
+        return "Page Source:\n" + AbstractApp.getDriver().getPageSource();
     }
 
     public final String getBrowserTitle() {
-        return AbstractApp.getInstanceDriver().getTitle();
+        return AbstractApp.getDriver().getTitle();
     }
 
     public final void refreshCurrentPage() {
-        AbstractApp.getInstanceDriver().navigate().refresh();
+        AbstractApp.getDriver().navigate().refresh();
         tryWaitUntil(this::isPageStateReady);
     }
 
@@ -39,19 +37,19 @@ public abstract class AbstractWebPage extends AbstractPage {
 
     // ************** WINDOW & TAB HANDLING **************** //
     public final String getWindowHandle() {
-        return AbstractApp.getInstanceDriver().getWindowHandle();
+        return AbstractApp.getDriver().getWindowHandle();
     }
 
     public Set<String> getWindowHandles() {
-        return AbstractApp.getInstanceDriver().getWindowHandles();
+        return AbstractApp.getDriver().getWindowHandles();
     }
 
     public final void closeCurrentWindow() {
-        AbstractApp.getInstanceDriver().close();
+        AbstractApp.getDriver().close();
     }
 
     public void switchToWindow(String nameOrHandle) {
-        AbstractApp.getInstanceDriver().switchTo().window(nameOrHandle);
+        AbstractApp.getDriver().switchTo().window(nameOrHandle);
     }
 
     public void switchToFirstWindow(){
@@ -107,11 +105,11 @@ public abstract class AbstractWebPage extends AbstractPage {
 
     // ************** FRAMES HANDLING **************** //
     protected void switchToFrame(int index) {
-        AbstractApp.getInstanceDriver().switchTo().frame(index);
+        AbstractApp.getDriver().switchTo().frame(index);
     }
 
     protected void switchToFrame(String nameOrId) {
-        AbstractApp.getInstanceDriver().switchTo().frame(nameOrId);
+        AbstractApp.getDriver().switchTo().frame(nameOrId);
     }
 
     protected void switchToFrame(WebElement frameElement) {
@@ -119,12 +117,12 @@ public abstract class AbstractWebPage extends AbstractPage {
     }
 
     protected void switchToDefaultContent() {
-        AbstractApp.getInstanceDriver().switchTo().defaultContent();
+        AbstractApp.getDriver().switchTo().defaultContent();
     }
 
 
 
     public JavascriptExecutor getJavascriptExecutor() {
-        return (JavascriptExecutor) AbstractApp.getInstanceDriver();
+        return (JavascriptExecutor) AbstractApp.getDriver();
     }
 }

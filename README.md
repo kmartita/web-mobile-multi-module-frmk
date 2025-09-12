@@ -26,8 +26,12 @@ Requires **Java 17**, **Maven 3.9.x**, **Allure Report 2.33.x**, and **Xcode 16.
 
 ## Table of Contents
 1. [Getting Started](#one)
+   * 1.1. [Installation prerequisites](#one-one)
+   * 1.2. [Build WebDriverAgent (WDA) in Xcode](#one-two)
+   * 1.3. [Build Test Application](#one-three)
 2. [Framework Structure](#two)
    * 2.1. [Configuring project](#two-one)
+   * 2.2. [Design pattern architecture](#two-two)
 3. [Tests Execution](#three)
    * 3.1. [Web:](#three-one)
    * 3.2. [Mobile:](#three-two)
@@ -35,10 +39,11 @@ Requires **Java 17**, **Maven 3.9.x**, **Allure Report 2.33.x**, and **Xcode 16.
 
 
 <a id="one"></a>
-### 1. Getting Started
-**This guide assumes to install the following:**
+## 1. Getting Started
+<a id="one-one"></a>
+### 1.1. Installation prerequisites:
 1. [Xcode](https://developer.apple.com/documentation/safari-developer-tools/installing-xcode-and-simulators) (>= v.16.4)<br/>
-   * Update **Components** (Xcode -> Settings -> Components ) to the latest versions<br/>
+   * Update **Components** (Xcode -> Settings -> Components) to the [latest versions](https://developer.apple.com/documentation/ios-ipados-release-notes).<br/>
 <img width="828" height="553" alt="Components" src="https://github.com/user-attachments/assets/6581a929-a673-4440-8cf9-377498133fc8" />
 
 2. Appium2 with [appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver)<br/>
@@ -83,11 +88,11 @@ npm install -g appium-doctor
 ```commandline
 appium-doctor --ios
 ```
-
-#### Build [WebDriverAgent (WDA) in Xcode](https://docs.katalon.com/katalon-studio/manage-projects/set-up-projects/mobile-testing/ios/mobile-install-webdriveragent-for-real-ios-devices-in-katalon-studio) for iOS Application Automation using Appium.<br/>
+<a id="one-two"></a>
+### 1.2. Build [WebDriverAgent (WDA) in Xcode](https://docs.katalon.com/katalon-studio/manage-projects/set-up-projects/mobile-testing/ios/mobile-install-webdriveragent-for-real-ios-devices-in-katalon-studio):<br/>
 Building WebDriverAgent (WDA) in Xcode is crucial for using Appium to automate iOS applications. WDA is a server that allows Appium to interact with iOS devices and simulators. 
 Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xcode:<br/>
-1. Locate the **WebDriverAgent** Directory<br/>
+##### 1. Locate the **WebDriverAgent** Directory:<br/>
    Path typically:<br/>
    ```text
    /usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
@@ -96,15 +101,14 @@ Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xc
    ```text
    ~/.npm-global/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent
    ```
-2. Open **WebDriverAgent** in Xcode<br/>
+##### 2. Open **WebDriverAgent** in Xcode:<br/>
    * Open Xcode<br/>
    * Select **File** -> **Open**<br/>
    * Navigate to the WebDriverAgent folder you found in the previous step<br/>
    * Open **WebDriverAgent.xcodeproj**<br/>
 
-3. Select Scheme: At top left, choose **WebDriverAgentRunner** scheme<br/>
-
-4. Configure Signing<br/>
+##### 3. Select Scheme: At top left, choose **WebDriverAgentRunner** scheme<br/>
+##### 4. Configure Signing:<br/>
    Ensure the project is set to use automatic signing:<br/>
    * Click on the **WebDriverAgentRunner** in the project navigator<br/>
    * Select the target (on the right side in the project settings)<br/>
@@ -112,34 +116,35 @@ Here’s a step-by-step guide on how to build and configure WebDriverAgent in Xc
      * Select your development team from the **Team** drop-down<br/>
      * Make sure the **Automatically manage signing** option is enabled<br/>
 
-5. Connect Device<br/>
+##### 5. Connect Device:<br/>
    * Connect your physical iOS device via USB or choose a simulator<br/>
    * In the top left corner, select your device or simulator from the device drop-down list<br/>
 
-6. Build the Project<br/>
-   * With the correct scheme selected and device input, click on **Product** in the Xcode menu.<br/>
-   * Select **Build** or press **Command + B**.<br/>
-   * Monitor the **Issue Navigator** (the triangle icon) for any errors.<br/>
+##### 6. Build the Project:<br/>
+   * With the correct scheme selected and device input, click on **Product** in the Xcode menu<br/>
+   * Select **Build** or press **Command + B**<br/>
+   * Monitor the **Issue Navigator** (the triangle icon) for any errors<br/>
 
-7. Fix Errors (if any): Resolve signing issues, dependencies, or iOS compatibility<br/>
-8. Run **WebDriverAgent Server**:<br/>
+##### 7. Fix Errors (if any): Resolve signing issues, dependencies, or iOS compatibility<br/>
+##### 8. Run **WebDriverAgent Server**:<br/>
    * Open a new terminal window<br/>
    * Run the following commands to start the Appium server:<br/>
 ```shell
    appium --log-level debug
 ```
    * WebDriverAgent will launch automatically<br/>
-   
-9. Verify WebDriverAgent Status:<br/>
+
+##### 9. Verify WebDriverAgent Status:<br/>
 ```html
    http://<device-ip>:8100/status
 ```
 Replace `<device-ip>` with the IP address of your iOS device while ensuring that the device’s WDA server is running.<br/>
 
-#### As a result, your WebDriverAgent should look like this:
+##### Result:
 <img width="1717" height="932" alt="WebDriverAgent" src="https://github.com/user-attachments/assets/e12429ae-e4f2-4470-bcf9-bbc650285175" />
 
-#### Build Test Application:
+<a id="one-three"></a>
+### 1.3. Build Test Application:
 1. Clone (or use option 'Open with Xcode') the project (iOS app for testing) from this [GitHub repository](https://github.com/kmartita/xcode-test-app).
    This is a simple 'Hello World!' application for iOS devices using Swift 6.1.2, created for testing purposes with Appium.
 2. Select a iOS simulator (e.g., `iPad (A16)`) in Xcode and build application. After a successful build, the `.app` file will appear in `DerivedData`:<br/>
@@ -147,13 +152,13 @@ Replace `<device-ip>` with the IP address of your iOS device while ensuring that
    ~/Library/Developer/Xcode/DerivedData/YourProject-XXXXXX/Build/Products/Debug-iphonesimulator/TestApp.app
 ```
 
-#### As a result, the following should be achieved:
+##### Result:
 <img width="1213" height="652" alt="TestApp-Xcode" src="https://github.com/user-attachments/assets/1ad96c6f-0cb7-42c0-9c69-11c4fae832ef" />
 <img width="1053" height="824" alt="TestApp-Simulator" src="https://github.com/user-attachments/assets/ee8dfa19-bfa5-489a-9e4e-23fcb9417bfa" />
 
 
 <a id="two"></a>
-### 2. Framework Structure
+## 2. Framework Structure
 This template provides a UI test automation solution suitable for both web and mobile (iOS). It is structured as a Maven multi-module project, with the following relationships between the modules:<br/>
 ```
 |———core-frmk
@@ -186,15 +191,19 @@ This template provides a UI test automation solution suitable for both web and m
    - `module-tests`. This module contains test classes and test configurations (`testng.xml`). It depends on **module-app** to access page objects and perform web UI testing in a controlled environment.<br/>
 
 <a id="two-one"></a>
-#### 2.1. Configuring project
+### 2.1. Configuring project:
 Run this command from the start to ensure that you don't have anything corrupted.<br/>
 ```bash
 cd core-frmk
 mvn clean install -U -DskipTests=true
 ```
 
+<a id="two-two"></a>
+### 2.2. Design pattern architecture:
+//TODO
+
 <a id="three"></a>
-### 3. Tests Execution
+## 3. Tests Execution
 Maven is used as the build and test management tool, with additional options for test configuration:<br/>
 `-Denv={String}`  specifies the environment for test execution (default: `test`)<br/>
 `-Dbrowser={String}` - defines the browser to run web tests on (default: `chrome`)<br/>
@@ -220,7 +229,7 @@ mvn clean test
 ```
 
 <a id="three-one"></a>
-#### 3.1. Web:
+### 3.1. Web:
 Create a hidden `.env` file containing the `BASE_URL` parameter to configure the web URL for testing. This will allow you to easily manage the base URL used during your web tests.<br/>
 ```properties
 BASE_URL = https://demoqa.com
@@ -246,7 +255,7 @@ mvn clean test -DsuiteFile=src/test/resources/suites/web.xml -Dthreads=3
 ```
 
 <a id="three-two"></a>
-#### 3.2. Mobile:
+### 3.2. Mobile:
 Create a hidden `.env` file containing the parameters `APPIUM_URL`, `APP_NAME`, and `APP_BUNDLE_ID` to configure the testing environment for mobile tests.<br/>
 Place your builded iOS application (e.g., `TestApp.app`) from `DerivedData` folder into the local `app` directory.<br/>
 The `APP_BUNDLE_ID` is a unique bundle identifier for a mobile application on the iOS or Android platform. This identifier is used to differentiate apps in systems and services such as the App Store or Google Play.<br/>
@@ -268,7 +277,7 @@ mvn clean test -Denv=dev -Dtest=HomeMobileTest -DiOS=18.6 -Ddevice="iPad Pro 13-
 
 
 <a id="four"></a>
-### 4. Generate and Review Allure Report
+## 4. Generate and Review Allure Report
 To generate a report by Allure after tests have finished, use the following command:<br/>
 ```bash
 mvn allure:report
@@ -286,8 +295,12 @@ An example of the generated [Allure TestNG](https://allurereport.org/docs/testng
 ```bash
 mvn clean test -Denv=dev
 ```
-By default web: browser = Chrome <br/>
-By default mobile: iOS = 18.6; device = iPad (A16)<br/>
+```requirements
+Browser: Chrome
+iOS-version: 18.6
+Deevice: iPad (A16)
+```
+##### Result:
 <img width="1530" height="957" alt="suites_overview" src="https://github.com/user-attachments/assets/786561dd-917c-4b71-8d1f-175c67bf00ce" />
 <img width="1412" height="572" alt="suites_behaviors" src="https://github.com/user-attachments/assets/784db419-8df3-4155-b93b-e74040220fe6" />
 
@@ -295,6 +308,7 @@ By default mobile: iOS = 18.6; device = iPad (A16)<br/>
 ```bash
 mvn clean test -DiOS=18.6 -Ddevice="iPad Air 11-inch (M3)" -Denv=dev -DsuiteFile=src/test/resources/suites/mobile.xml
 ```
+##### Result:
 <img width="1420" height="804" alt="mobile_overview" src="https://github.com/user-attachments/assets/e56a435d-709b-4de1-a234-b2258e64148c" />
 <img width="1420" height="1194" alt="mobile-packages" src="https://github.com/user-attachments/assets/e9f771a7-ee4d-44ae-90be-06f487841408" />
 
@@ -302,7 +316,10 @@ mvn clean test -DiOS=18.6 -Ddevice="iPad Air 11-inch (M3)" -Denv=dev -DsuiteFile
 ```bash
 mvn clean test -Dbrowser=firefox -DsuiteFile=src/test/resources/suites/web.xml
 ```
-By default env: test
+```requirements
+Env: test
+```
+##### Result:
 <img width="1412" height="781" alt="web_overview" src="https://github.com/user-attachments/assets/38cb9642-0b5c-4d69-8464-b374b56fbcb7" />
 <img width="1418" height="1110" alt="web_failed" src="https://github.com/user-attachments/assets/158f7f45-a867-4289-9882-7bb439f31290" />
 

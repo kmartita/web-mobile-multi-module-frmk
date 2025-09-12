@@ -2,7 +2,7 @@ package project.tools.pageobject;
 
 import org.openqa.selenium.WrapsElement;
 
-public interface GuiElement extends WrapsElement {
+public interface UiElement extends WrapsElement {
 
     boolean exists();
 

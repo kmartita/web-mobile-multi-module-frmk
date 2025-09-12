@@ -1,9 +1,7 @@
 package project.app;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
 import project.tools.pageobject.AbstractApp;
-import project.tools.reports.AllureUtils;
 import project.web.pages.HomePage;
 
 import static project.tools.ConfigurationManager.getEnvironment;
@@ -17,10 +15,10 @@ public class Web extends AbstractApp {
         System.out.printf("PLATFORM: '%s'%n", getPlatform());
         System.out.printf("ENVIRONMENT: '%s'%n", getEnvironment());
 
-        if (getInstanceDriver().getTitle().isEmpty()) {
-            getInstanceDriver().get(BASE_URL);
+        if (getDriver().getTitle().isEmpty()) {
+            getDriver().get(BASE_URL);
         }
-        getInstanceDriver().manage().deleteAllCookies();
+        getDriver().manage().deleteAllCookies();
     }
 
     public HomePage openHomePage() {

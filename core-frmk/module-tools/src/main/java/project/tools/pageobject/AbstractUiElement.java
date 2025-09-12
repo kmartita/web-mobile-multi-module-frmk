@@ -15,7 +15,7 @@ import project.tools.utils.WebElementUtils;
 
 import static project.tools.utils.WaitUtil.DEFAULT_TIMEOUT_TO_WAIT;
 
-public abstract class AbstractUiElement extends Widget implements GuiElement {
+public abstract class AbstractUiElement extends Widget implements UiElement {
 
     protected String name;
     private FluentWait<WebDriver> waiter;

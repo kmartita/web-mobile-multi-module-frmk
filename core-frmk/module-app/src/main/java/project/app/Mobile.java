@@ -1,7 +1,6 @@
 package project.app;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
 import org.openqa.selenium.Dimension;
 import project.mobile.screens.HomeScreen;
 import project.tools.Platform;

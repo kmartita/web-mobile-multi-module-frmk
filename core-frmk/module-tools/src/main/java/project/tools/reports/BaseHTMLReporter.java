@@ -199,7 +199,7 @@ public class BaseHTMLReporter extends HTMLReporter implements ITestListener {
         String relativePath = StringUtils.EMPTY;
         try {
             File srcFile = File.createTempFile("screenshot", ".jpg");
-            byte[] screenshotBytes = AllureUtils.makeScreenshot(AbstractApp.getInstanceDriver());
+            byte[] screenshotBytes = AllureUtils.makeScreenshot(AbstractApp.getDriver());
 
             if (screenshotBytes != null) {
                 FileUtils.writeByteArrayToFile(srcFile, screenshotBytes);

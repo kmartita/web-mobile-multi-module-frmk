@@ -61,7 +61,7 @@ public final class WebElementUtils {
 
     public static boolean isAlertPresent() {
         try {
-            AbstractApp.getInstanceDriver().switchTo().alert();
+            AbstractApp.getDriver().switchTo().alert();
             return true;
         } catch (NoAlertPresentException ex) {
             return false;
