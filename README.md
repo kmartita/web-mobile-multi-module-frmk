@@ -209,7 +209,7 @@ Maven is used as the build and test management tool, with additional options for
 `-Denv={String}`  specifies the environment for test execution (default: `test`)<br/>
 `-Dbrowser={String}` - defines the browser to run web tests on (default: `chrome`)<br/>
 `-DiOS={int}` - defines the iOS version to run mobile tests on (default: the version set in Xcode)<br/>
--`Ddevice={String}` - defines the name of device for run mobile tests on (default: the name set in Xcode)<br/>
+`-Ddevice={String}` - defines the name of device for run mobile tests on (default: the name set in Xcode)<br/>
 `-Dthreads={int}` -  specifies the number of threads for parallel test execution<br/>
 `-Dtest={String}` - the specific test class to run<br/>
 
